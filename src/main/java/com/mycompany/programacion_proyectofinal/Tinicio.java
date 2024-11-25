@@ -18,7 +18,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
      */
     public Tinicio() {
         initComponents();
-        Image foto = new ImageIcon("tienda.png").getImage();
+        Image foto = new ImageIcon("Logo.png").getImage();
         ImageIcon icono =  new ImageIcon(foto.getScaledInstance(icono_tienda.getWidth(),icono_tienda.getHeight(),Image.SCALE_SMOOTH));
         iconoP.setIcon(icono);
         setIconImage(new ImageIcon("tienda.png").getImage());
@@ -115,7 +115,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
 
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         titulo.setForeground(new java.awt.Color(255, 255, 255));
-        titulo.setText("Tienda");
+        titulo.setText("Guau Miau Store");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,7 +127,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                            .addComponent(eliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
                             .addComponent(historico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(agregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(mostrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -135,12 +135,11 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(icono_tienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(titulo)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(titulo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +171,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         contenido.setLayout(contenidoLayout);
         contenidoLayout.setHorizontalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1078, Short.MAX_VALUE)
+            .addGap(0, 1081, Short.MAX_VALUE)
         );
         contenidoLayout.setVerticalGroup(
             contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,6 +285,16 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
 
             contenido.removeAll();
             contenido.add(buscar_p,BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
+        }
+        if(evt.getSource() == historico){
+            Historial_productos historial_p = new Historial_productos();
+            historial_p.setLocation(0, 0);
+            historial_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+            contenido.removeAll();
+            contenido.add(historial_p,BorderLayout.CENTER);
             contenido.revalidate();
             contenido.repaint();
         }

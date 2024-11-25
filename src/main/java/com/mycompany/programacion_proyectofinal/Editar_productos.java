@@ -1,14 +1,18 @@
 package com.mycompany.programacion_proyectofinal;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author hiram
  */
 public class Editar_productos extends javax.swing.JPanel implements ActionListener {
-
+    String ruta;
     /**
      * Creates new form Editar_productos
      */
@@ -45,6 +49,8 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         guardar = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         principal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -168,7 +174,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         agregar_seccionLayout.setVerticalGroup(
             agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,11 +201,11 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                 .addComponent(precio_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(imagen_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cargar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(editar)
                 .addContainerGap())
         );
@@ -233,27 +239,26 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         principalLayout.setHorizontalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(principalLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(agregar_seccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(principalLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
+                    .addGroup(principalLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(guardar)
                         .addGap(18, 18, 18))))
         );
         principalLayout.setVerticalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(agregar_seccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(principalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addGap(18, 18, 18)
                 .addComponent(guardar)
                 .addContainerGap())
+            .addComponent(agregar_seccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -296,9 +301,26 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+    
+    public void cargarImagen(){
+        JFileChooser archivos = new JFileChooser();
+        FileNameExtensionFilter imagenes = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
+        archivos.setFileFilter(imagenes);
 
+        int respuesta = archivos.showOpenDialog(this);
+        if(respuesta == archivos.APPROVE_OPTION){
+            ruta = archivos.getSelectedFile().getPath();
+
+            Image foto = new ImageIcon(ruta).getImage();
+            ImageIcon icono = new ImageIcon(foto.getScaledInstance(imagen.getWidth(),imagen.getHeight(),Image.SCALE_SMOOTH));
+            imagen.setIcon(icono);
+        }
+    }
+    
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actionPerformed(ActionEvent evt) {
+        if(evt.getSource() == cargar){
+            cargarImagen();
+        }
     }
 }
