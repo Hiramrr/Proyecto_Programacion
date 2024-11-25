@@ -1,14 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.mycompany.programacion_proyectofinal;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
- * @author cinom
+ * @author hiram
  */
-public class Editar_productos extends javax.swing.JPanel {
+public class Editar_productos extends javax.swing.JPanel implements ActionListener {
 
     /**
      * Creates new form Editar_productos
@@ -303,4 +302,9 @@ public class Editar_productos extends javax.swing.JPanel {
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
