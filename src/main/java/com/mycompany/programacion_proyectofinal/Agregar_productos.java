@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Agregar_productos extends javax.swing.JPanel implements ActionListener {
     String ruta;
     /**
-     * Creates new form Mostrar_productos
+     * Se inicializan los elementos de la interfaz
      */
     public Agregar_productos() {
         initComponents();
@@ -297,7 +297,10 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
-    
+    /**
+     * Genera una clave random para el producto que puede ir desde 10000 hasta 65535
+     * @return numero Aleatorio
+     */
     public String generarClave(){
         Random random = new Random();
         int limiteInferior = 10000;
@@ -308,6 +311,10 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         return String.valueOf(numeroAleatorio);
     }
     
+    /**
+     * Carga una imagen del sistema haciendo uso de JFileChooser 
+     * La imagen obtenida la coloca en el label imagen
+     */
     public void cargarImagen(){
         JFileChooser archivos = new JFileChooser();
         FileNameExtensionFilter imagenes = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
@@ -323,6 +330,9 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
     
+    /**
+    * Maneja las acciones de los botones
+    */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == cargar){
@@ -330,6 +340,11 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
     
+    /**
+     * Obtiene el arreglo de bytes de la imagen por medio de su ruta en el sistema
+     * @param ruta
+     * @return 
+     */
     private byte[] getImagen(String ruta){
         File imagen = new File(ruta);
         try{

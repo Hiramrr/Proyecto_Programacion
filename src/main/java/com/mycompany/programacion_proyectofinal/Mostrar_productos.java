@@ -11,7 +11,7 @@ package com.mycompany.programacion_proyectofinal;
 public class Mostrar_productos extends javax.swing.JPanel {
 
     /**
-     * Creates new form Mostrar_Productos
+     * Se inicializan los elementos de la interfaz
      */
     public Mostrar_productos() {
         initComponents();
@@ -32,9 +32,9 @@ public class Mostrar_productos extends javax.swing.JPanel {
         guardar = new javax.swing.JButton();
         agregar_seccion = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        orden_default = new javax.swing.JButton();
+        orden_nombre = new javax.swing.JButton();
+        orden_precio = new javax.swing.JButton();
 
         principal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -70,30 +70,20 @@ public class Mostrar_productos extends javax.swing.JPanel {
         titulo.setForeground(new java.awt.Color(1, 52, 87));
         titulo.setText("Mostrar Productos");
 
-        jButton1.setBackground(new java.awt.Color(237, 240, 242));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(1, 52, 87));
-        jButton1.setText("Ordenar por Default");
+        orden_default.setBackground(new java.awt.Color(237, 240, 242));
+        orden_default.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        orden_default.setForeground(new java.awt.Color(1, 52, 87));
+        orden_default.setText("Ordenar por Default");
 
-        jButton2.setBackground(new java.awt.Color(237, 240, 242));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(1, 52, 87));
-        jButton2.setText("Ordenar por nombre ");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        orden_nombre.setBackground(new java.awt.Color(237, 240, 242));
+        orden_nombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        orden_nombre.setForeground(new java.awt.Color(1, 52, 87));
+        orden_nombre.setText("Ordenar por nombre ");
 
-        jButton3.setBackground(new java.awt.Color(237, 240, 242));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(1, 52, 87));
-        jButton3.setText("Ordenar por precio");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+        orden_precio.setBackground(new java.awt.Color(237, 240, 242));
+        orden_precio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        orden_precio.setForeground(new java.awt.Color(1, 52, 87));
+        orden_precio.setText("Ordenar por precio");
 
         javax.swing.GroupLayout agregar_seccionLayout = new javax.swing.GroupLayout(agregar_seccion);
         agregar_seccion.setLayout(agregar_seccionLayout);
@@ -103,9 +93,9 @@ public class Mostrar_productos extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addComponent(titulo)
                 .addContainerGap(26, Short.MAX_VALUE))
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(orden_default, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(orden_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(orden_precio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         agregar_seccionLayout.setVerticalGroup(
             agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,11 +103,11 @@ public class Mostrar_productos extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addComponent(titulo)
                 .addGap(113, 113, 113)
-                .addComponent(jButton1)
+                .addComponent(orden_default)
                 .addGap(75, 75, 75)
-                .addComponent(jButton2)
+                .addComponent(orden_nombre)
                 .addGap(75, 75, 75)
-                .addComponent(jButton3)
+                .addComponent(orden_precio)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -162,22 +152,14 @@ public class Mostrar_productos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel agregar_seccion;
     private javax.swing.JButton guardar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton orden_default;
+    private javax.swing.JButton orden_nombre;
+    private javax.swing.JButton orden_precio;
     private javax.swing.JPanel principal;
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;

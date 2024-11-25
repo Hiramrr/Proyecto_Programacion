@@ -21,6 +21,8 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         Image foto = new ImageIcon("tienda.png").getImage();
         ImageIcon icono =  new ImageIcon(foto.getScaledInstance(icono_tienda.getWidth(),icono_tienda.getHeight(),Image.SCALE_SMOOTH));
         iconoP.setIcon(icono);
+        setIconImage(new ImageIcon("tienda.png").getImage());
+        this.setTitle("Tiendita");
         
     }
 
@@ -240,7 +242,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         if(evt.getSource() == agregar){
             Agregar_productos agregar_P = new Agregar_productos();
             agregar_P.setLocation(0, 0);
-            agregar_P.setSize(1078, 718);
+            agregar_P.setSize(contenido.getWidth(), contenido.getHeight());
 
             contenido.removeAll();
             contenido.add(agregar_P,BorderLayout.CENTER);
@@ -250,7 +252,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         if(evt.getSource() == mostrar){
             Mostrar_productos mostrar_p = new Mostrar_productos();
             mostrar_p.setLocation(0, 0);
-            mostrar_p.setSize(1078, 718);
+            mostrar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
             contenido.removeAll();
             contenido.add(mostrar_p,BorderLayout.CENTER);
