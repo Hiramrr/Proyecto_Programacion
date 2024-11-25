@@ -39,7 +39,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         tabla = new javax.swing.JTable();
         guardar = new javax.swing.JButton();
         agregar_seccion = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         clave_label = new javax.swing.JLabel();
         clave_t = new javax.swing.JTextField();
@@ -90,9 +90,9 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
         agregar_seccion.setBackground(new java.awt.Color(237, 240, 242));
 
-        jButton1.setBackground(new java.awt.Color(35, 135, 55));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Agregar");
+        agregar.setBackground(new java.awt.Color(35, 135, 55));
+        agregar.setForeground(new java.awt.Color(255, 255, 255));
+        agregar.setText("Agregar");
 
         titulo.setBackground(new java.awt.Color(1, 52, 87));
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -193,7 +193,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
                             .addComponent(imagen_label)))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jButton1))
+                        .addComponent(agregar))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addGap(74, 74, 74)
                         .addComponent(cargar)))
@@ -233,7 +233,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cargar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(agregar)
                 .addContainerGap())
         );
 
@@ -276,6 +276,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agregar;
     private javax.swing.JPanel agregar_seccion;
     private javax.swing.JLabel cantidad_label;
     private javax.swing.JTextField cantidad_t;
@@ -285,7 +286,6 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     private javax.swing.JButton guardar;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel imagen_label;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lugar;
     private javax.swing.JLabel nombre_label;
@@ -329,6 +329,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             imagen.setIcon(icono);
         }
     }
+    
     
     /**
     * Maneja las acciones de los botones

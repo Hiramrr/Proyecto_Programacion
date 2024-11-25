@@ -25,13 +25,9 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         principal = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabla = new javax.swing.JTable();
-        guardar = new javax.swing.JButton();
         agregar_seccion = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        editar = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
         clave_label = new javax.swing.JLabel();
         clave_t = new javax.swing.JTextField();
@@ -43,41 +39,20 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         precio_t = new javax.swing.JTextField();
         precio_label = new javax.swing.JLabel();
         imagen_label = new javax.swing.JLabel();
+        cargar = new javax.swing.JButton();
         lugar = new javax.swing.JPanel();
         imagen = new javax.swing.JLabel();
-        cargar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        guardar = new javax.swing.JButton();
 
         principal.setBackground(new java.awt.Color(255, 255, 255));
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Código", "Nombre", "Cantidad", "Precio", "Imagen"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabla.setRowHeight(70);
-        tabla.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tabla);
-
-        guardar.setBackground(new java.awt.Color(35, 135, 55));
-        guardar.setForeground(new java.awt.Color(255, 255, 255));
-        guardar.setText("Guardar Cambios");
-
         agregar_seccion.setBackground(new java.awt.Color(237, 240, 242));
 
-        jButton1.setBackground(new java.awt.Color(35, 135, 55));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Agregar");
+        editar.setBackground(new java.awt.Color(35, 135, 55));
+        editar.setForeground(new java.awt.Color(255, 255, 255));
+        editar.setText("Editar");
 
         titulo.setBackground(new java.awt.Color(1, 52, 87));
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -131,23 +106,33 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         imagen_label.setForeground(new java.awt.Color(1, 52, 87));
         imagen_label.setText("Imagen:");
 
+        cargar.setBackground(new java.awt.Color(30, 112, 235));
+        cargar.setForeground(new java.awt.Color(255, 255, 255));
+        cargar.setText("Cargar imagen");
+        cargar.addActionListener(this);
+
         lugar.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout lugarLayout = new javax.swing.GroupLayout(lugar);
         lugar.setLayout(lugarLayout);
         lugarLayout.setHorizontalGroup(
             lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagen, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addGap(0, 182, Short.MAX_VALUE)
+            .addGroup(lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(lugarLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         lugarLayout.setVerticalGroup(
             lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(imagen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addGap(0, 182, Short.MAX_VALUE)
+            .addGroup(lugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(lugarLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-
-        cargar.setBackground(new java.awt.Color(30, 112, 235));
-        cargar.setForeground(new java.awt.Color(255, 255, 255));
-        cargar.setText("Cargar imagen");
-        cargar.addActionListener(this);
 
         javax.swing.GroupLayout agregar_seccionLayout = new javax.swing.GroupLayout(agregar_seccion);
         agregar_seccion.setLayout(agregar_seccionLayout);
@@ -159,18 +144,15 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                         .addContainerGap()
                         .addGroup(agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nombre_label)
-                            .addComponent(nombre_t, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cantidad_label)
                             .addComponent(cantidad_t, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nombre_t, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imagen_label)
                             .addComponent(precio_label)
-                            .addComponent(precio_t, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(imagen_label)))
+                            .addComponent(precio_t, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jButton1))
-                    .addGroup(agregar_seccionLayout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(cargar))
+                        .addComponent(editar))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -179,12 +161,14 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                                 .addComponent(clave_label, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(clave_t, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(6, 6, 6)
-                        .addComponent(porque)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agregar_seccionLayout.createSequentialGroup()
-                .addGap(0, 43, Short.MAX_VALUE)
-                .addComponent(lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                        .addComponent(porque))
+                    .addGroup(agregar_seccionLayout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(cargar))
+                    .addGroup(agregar_seccionLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         agregar_seccionLayout.setVerticalGroup(
             agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,76 +189,87 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                 .addComponent(cantidad_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cantidad_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(precio_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(precio_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(imagen_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(lugar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cargar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(editar)
                 .addContainerGap())
         );
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Nombre", "Cantidad", "Precio", "Imagen"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabla.setRowHeight(70);
+        tabla.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tabla);
+
+        guardar.setBackground(new java.awt.Color(35, 135, 55));
+        guardar.setForeground(new java.awt.Color(255, 255, 255));
+        guardar.setText("Guardar Cambios");
 
         javax.swing.GroupLayout principalLayout = new javax.swing.GroupLayout(principal);
         principal.setLayout(principalLayout);
         principalLayout.setHorizontalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(principalLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(agregar_seccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(principalLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(guardar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(guardar)
+                        .addGap(18, 18, 18))))
         );
         principalLayout.setVerticalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(agregar_seccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(principalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(guardar)
                 .addContainerGap())
-            .addComponent(agregar_seccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1073, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 718, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -286,11 +281,10 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     private javax.swing.JButton cargar;
     private javax.swing.JLabel clave_label;
     private javax.swing.JTextField clave_t;
+    private javax.swing.JButton editar;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel imagen;
     private javax.swing.JLabel imagen_label;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel lugar;
     private javax.swing.JLabel nombre_label;

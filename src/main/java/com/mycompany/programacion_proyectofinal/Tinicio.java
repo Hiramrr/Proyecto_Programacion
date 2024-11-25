@@ -22,7 +22,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         ImageIcon icono =  new ImageIcon(foto.getScaledInstance(icono_tienda.getWidth(),icono_tienda.getHeight(),Image.SCALE_SMOOTH));
         iconoP.setIcon(icono);
         setIconImage(new ImageIcon("tienda.png").getImage());
-        this.setTitle("Tiendita");
+        this.setTitle("Guau Miau Store");
         
     }
 
@@ -256,6 +256,36 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
 
             contenido.removeAll();
             contenido.add(mostrar_p,BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
+        }
+        if(evt.getSource() == editar){
+            Editar_productos editar_p = new Editar_productos();
+            editar_p.setLocation(0, 0);
+            editar_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+            contenido.removeAll();
+            contenido.add(editar_p,BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
+        }
+        if(evt.getSource() == eliminar){
+            Eliminar_productos eliminar_p = new Eliminar_productos();
+            eliminar_p.setLocation(0, 0);
+            eliminar_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+            contenido.removeAll();
+            contenido.add(eliminar_p,BorderLayout.CENTER);
+            contenido.revalidate();
+            contenido.repaint();
+        }
+        if(evt.getSource() == buscar){
+            Buscar_productos buscar_p = new Buscar_productos();
+            buscar_p.setLocation(0, 0);
+            buscar_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+            contenido.removeAll();
+            contenido.add(buscar_p,BorderLayout.CENTER);
             contenido.revalidate();
             contenido.repaint();
         }
