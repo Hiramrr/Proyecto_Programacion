@@ -25,7 +25,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         iconoP.setIcon(icono);
         setIconImage(new ImageIcon("tienda.png").getImage());
         this.setTitle("Guau Miau Store");
-        
+        historial("Se ha iniciado sesion!");
     }
 
     /**
