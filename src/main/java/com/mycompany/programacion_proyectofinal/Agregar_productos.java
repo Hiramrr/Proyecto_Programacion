@@ -1,11 +1,16 @@
 package com.mycompany.programacion_proyectofinal;
 
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -359,6 +364,77 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         } catch (Exception e){
             System.out.println(e);
             return null;
+        }
+    }
+    // creacion del archivo json
+    private static final String ARCHIVO_JSON = "productos.json";
+    public static List<Producto> productos = cargarProductosDesdeArchivo();
+    /** Metodo para agregar un producto al archivo JSON
+     *
+     * @param producto
+     */
+    public static void agregarProductoAlArchivo(Producto producto) {
+
+
+        productos.add(producto);
+
+        // Convertir lista a JSON y guardar en el archivo
+        JSONArray jsonArray = new JSONArray();
+        for (Producto prod : productos) {
+            JSONObject json = new JSONObject();
+            json.put("Clave", prod.getClave());
+            json.put("Nombre", prod.getNombre());
+            json.put("Precio", prod.getPrecio());
+            json.put("Cantidad", prod.getCantidad());
+            jsonArray.put(json);
+        }
+
+        try (FileWriter file = new FileWriter(ARCHIVO_JSON)) {
+            file.write(jsonArray.toString(4)); // Formateado con 4 espacios
+            System.out.println("Producto agregado al archivo: " + producto);
+        } catch (IOException e) {
+            System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
+        }
+    }
+
+    /**metodo para agregar los productos del archivo a la lista
+     *
+     * @return productos que es una lista
+     */
+    public static List<Producto> cargarProductosDesdeArchivo() {
+        List<Producto> productos = new ArrayList<>();
+        File archivo = new File(ARCHIVO_JSON);
+
+        if (archivo.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+                StringBuilder contenido = new StringBuilder();
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    contenido.append(linea);
+                }
+                 //
+                JSONArray jsonArray = new JSONArray(contenido.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    Producto producto = new Producto(
+                            jsonObject.getInt("clave"),
+                            jsonObject.getString("nombre"),
+                            jsonObject.getInt("cantidad"),
+                            jsonObject.getDouble("precio")
+                    );
+                    productos.add(producto);
+                }
+            } catch (IOException e) {
+                System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+            }
+        }
+
+        return productos;
+    }
+
+    public void buscarProducto(){
+        for(Producto p : productos){
+
         }
     }
 }
