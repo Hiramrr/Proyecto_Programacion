@@ -7,8 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Random;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -338,6 +337,9 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == cargar){
             cargarImagen();
+        }
+        if(evt.getSource() == agregar){
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se ha agreado un producto! " + nombre_t.getText());
         }
     }
     

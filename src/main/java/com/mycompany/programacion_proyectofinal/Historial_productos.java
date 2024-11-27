@@ -4,17 +4,21 @@
  */
 package com.mycompany.programacion_proyectofinal;
 
+import java.util.Stack;
+
 /**
  *
  * @author cinom
  */
 public class Historial_productos extends javax.swing.JPanel {
-
+    Stack <String> historial;
     /**
      * Creates new form Historial_productos
      */
-    public Historial_productos() {
+    public Historial_productos(Stack<String> historial) {
         initComponents();
+        this.historial = historial;
+        llenarTexto();
     }
 
     /**
@@ -108,4 +112,11 @@ public class Historial_productos extends javax.swing.JPanel {
     private javax.swing.JPanel principal;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    public void llenarTexto(){
+        jTextArea1.setText("");
+        for (String string : this.historial) {
+            jTextArea1.append(string + "\n");
+        }
+    }
 }

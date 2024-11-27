@@ -5,19 +5,21 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Stack;
 import javax.swing.ImageIcon;
 
 /**
  *
- * @author sasuk
+ * @author hiram
  */
 public class Tinicio extends javax.swing.JFrame implements ActionListener {
-
+    Stack<String> historial = new Stack<>();
     /**
      * Creates new form Tinicio
      */
     public Tinicio() {
         initComponents();
+        this.historial = historial;
         Image foto = new ImageIcon("Logo.png").getImage();
         ImageIcon icono =  new ImageIcon(foto.getScaledInstance(icono_tienda.getWidth(),icono_tienda.getHeight(),Image.SCALE_SMOOTH));
         iconoP.setIcon(icono);
@@ -289,7 +291,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == historico){
-            Historial_productos historial_p = new Historial_productos();
+            Historial_productos historial_p = new Historial_productos(this.historial);
             historial_p.setLocation(0, 0);
             historial_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -298,5 +300,10 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.revalidate();
             contenido.repaint();
         }
+    }
+
+    public void historial(String mensaje){
+        System.out.println("Me llamaron");
+        this.historial.push(mensaje);
     }
 }
