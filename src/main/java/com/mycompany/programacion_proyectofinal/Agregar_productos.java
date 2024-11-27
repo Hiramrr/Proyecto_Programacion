@@ -92,6 +92,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         agregar.setBackground(new java.awt.Color(35, 135, 55));
         agregar.setForeground(new java.awt.Color(255, 255, 255));
         agregar.setText("Agregar");
+        agregar.addActionListener(this);
 
         titulo.setBackground(new java.awt.Color(1, 52, 87));
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
