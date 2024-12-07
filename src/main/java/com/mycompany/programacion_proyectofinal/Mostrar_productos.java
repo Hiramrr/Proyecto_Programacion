@@ -91,16 +91,19 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
         orden_default.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         orden_default.setForeground(new java.awt.Color(1, 52, 87));
         orden_default.setText("Ordenar por Default");
+        orden_default.addActionListener(this);
 
         orden_nombre.setBackground(new java.awt.Color(237, 240, 242));
         orden_nombre.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         orden_nombre.setForeground(new java.awt.Color(1, 52, 87));
         orden_nombre.setText("Ordenar por nombre ");
+        orden_nombre.addActionListener(this);
 
         orden_precio.setBackground(new java.awt.Color(237, 240, 242));
         orden_precio.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         orden_precio.setForeground(new java.awt.Color(1, 52, 87));
         orden_precio.setText("Ordenar por precio");
+        orden_precio.addActionListener(this);
 
         javax.swing.GroupLayout agregar_seccionLayout = new javax.swing.GroupLayout(agregar_seccion);
         agregar_seccion.setLayout(agregar_seccionLayout);

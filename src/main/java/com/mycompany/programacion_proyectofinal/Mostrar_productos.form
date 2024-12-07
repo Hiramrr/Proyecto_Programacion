@@ -206,6 +206,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ordenar por Default"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="orden_default.addActionListener(this);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="orden_nombre">
               <Properties>
@@ -220,6 +223,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ordenar por nombre "/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="orden_nombre.addActionListener(this);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="orden_precio">
               <Properties>
@@ -234,6 +240,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ordenar por precio"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="orden_precio.addActionListener(this);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
