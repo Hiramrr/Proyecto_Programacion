@@ -1,10 +1,20 @@
 
 package com.mycompany.programacion_proyectofinal;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 import java.util.Stack;
 import javax.swing.ImageIcon;
 
@@ -14,6 +24,8 @@ import javax.swing.ImageIcon;
  */
 public class Tinicio extends javax.swing.JFrame implements ActionListener {
     Stack<String> historial = new Stack<>();
+    List<Producto> productos;
+    private final String ARCHIVO_JSON = "productos.json";
     /**
      * Creates new form Tinicio
      */
@@ -26,6 +38,11 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         setIconImage(new ImageIcon("tienda.png").getImage());
         this.setTitle("Guau Miau Store");
         historial("Se ha iniciado sesion!");
+        try {
+            productos = cargarProductosDesdeArchivo();
+        } catch (Exception e) {
+            productos = new ArrayList<>();
+        }
     }
 
     /**
@@ -238,10 +255,47 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
+    /**metodo para agregar los productos del archivo a la lista
+     *Decodifica de base 64 la imagen
+     * @return productos que es una lista
+     */
+    public List<Producto> cargarProductosDesdeArchivo() {
+        List<Producto> productos = new ArrayList<>();
+        File archivo = new File(ARCHIVO_JSON);
+
+        if (archivo.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
+                StringBuilder contenido = new StringBuilder();
+                String linea;
+                while ((linea = reader.readLine()) != null) {
+                    contenido.append(linea);
+                }
+                //
+                JSONArray jsonArray = new JSONArray(contenido.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    byte[] imagenProducto = Base64.getDecoder().decode(jsonObject.getString("Imagen"));
+                    Producto producto = new Producto(
+                            jsonObject.getInt("Clave"),
+                            jsonObject.getString("Nombre"),
+                            jsonObject.getInt("Cantidad"),
+                            jsonObject.getDouble("Precio"),
+                            imagenProducto
+                    );
+                    productos.add(producto);
+                }
+            } catch (IOException e) {
+                System.err.println("Error al leer el archivo JSON: " + e.getMessage());
+            }
+        }
+
+        return productos;
+    }
+
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == agregar){
-            Agregar_productos agregar_P = new Agregar_productos();
+            Agregar_productos agregar_P = new Agregar_productos(productos);
             agregar_P.setLocation(0, 0);
             agregar_P.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -251,7 +305,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == mostrar){
-            Mostrar_productos mostrar_p = new Mostrar_productos();
+            Mostrar_productos mostrar_p = new Mostrar_productos(productos);
             mostrar_p.setLocation(0, 0);
             mostrar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -261,7 +315,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == editar){
-            Editar_productos editar_p = new Editar_productos();
+            Editar_productos editar_p = new Editar_productos(productos);
             editar_p.setLocation(0, 0);
             editar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -271,7 +325,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == eliminar){
-            Eliminar_productos eliminar_p = new Eliminar_productos();
+            Eliminar_productos eliminar_p = new Eliminar_productos(productos);
             eliminar_p.setLocation(0, 0);
             eliminar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -281,7 +335,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == buscar){
-            Buscar_productos buscar_p = new Buscar_productos();
+            Buscar_productos buscar_p = new Buscar_productos(productos);
             buscar_p.setLocation(0, 0);
             buscar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -303,7 +357,6 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     }
 
     public void historial(String mensaje){
-        System.out.println("Me llamaron");
         this.historial.push(mensaje);
     }
 }

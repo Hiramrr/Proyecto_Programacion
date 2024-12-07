@@ -4,6 +4,13 @@
  */
 package com.mycompany.programacion_proyectofinal;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.util.List;
+
 /**
  *
  * @author cinom
@@ -13,8 +20,10 @@ public class Buscar_productos extends javax.swing.JPanel {
     /**
      * Creates new form Buscar_productos
      */
-    public Buscar_productos() {
+    public Buscar_productos(List<Producto> productos) {
         initComponents();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
+        agregarTabla(productos);
     }
 
     /**
@@ -152,4 +161,34 @@ public class Buscar_productos extends javax.swing.JPanel {
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+    /**
+     * Agrega una fila a la tabla de productos del archivo JSON
+     * @param productos
+     */
+    public void agregarTabla(List<Producto> productos) {
+        for(Producto producto: productos) {
+            Object[] fila = new Object[5];
+            fila[0] = String.valueOf(producto.getClave());
+            fila[1] = producto.getNombre();
+            fila[2] = String.valueOf(producto.getCantidad());
+            fila[3] = String.valueOf(producto.getPrecio());
+
+            try {
+                byte[] imagenProducto = producto.getImagen();
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+
+                if (bufferedImage != null) {
+                    ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+                    fila[4] = new JLabel(mFoto);
+                } else {
+                    fila[4] = "Espero que nunca pase esto";
+                }
+            } catch (Exception e) {
+                System.out.println("Error al procesar la imagen: " + e);
+                fila[4] = "Error";
+            }
+
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+        }
+    }
 }

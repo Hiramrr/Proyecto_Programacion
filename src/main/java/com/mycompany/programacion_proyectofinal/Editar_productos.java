@@ -3,8 +3,12 @@ package com.mycompany.programacion_proyectofinal;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -13,11 +17,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Editar_productos extends javax.swing.JPanel implements ActionListener {
     String ruta;
+
     /**
      * Creates new form Editar_productos
      */
-    public Editar_productos() {
+    public Editar_productos(List<Producto> productos) {
         initComponents();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
+        agregarTabla(productos);
     }
 
     /**
@@ -300,7 +307,10 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
-    
+
+    /**
+     * Carga una imagen en el JLabel
+     */
     public void cargarImagen(){
         JFileChooser archivos = new JFileChooser();
         FileNameExtensionFilter imagenes = new FileNameExtensionFilter("JPG, PNG & GIF", "jpg", "png", "gif");
@@ -313,6 +323,37 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
             Image foto = new ImageIcon(ruta).getImage();
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(imagen.getWidth(),imagen.getHeight(),Image.SCALE_SMOOTH));
             imagen.setIcon(icono);
+        }
+    }
+
+    /**
+     * Agrega una fila a la tabla de productos del archivo JSON
+     * @param productos
+     */
+    public void agregarTabla(List<Producto> productos) {
+        for(Producto producto: productos) {
+            Object[] fila = new Object[5];
+            fila[0] = String.valueOf(producto.getClave());
+            fila[1] = producto.getNombre();
+            fila[2] = String.valueOf(producto.getCantidad());
+            fila[3] = String.valueOf(producto.getPrecio());
+
+            try {
+                byte[] imagenProducto = producto.getImagen();
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+
+                if (bufferedImage != null) {
+                    ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+                    fila[4] = new JLabel(mFoto);
+                } else {
+                    fila[4] = "Espero que nunca pase esto";
+                }
+            } catch (Exception e) {
+                System.out.println("Error al procesar la imagen: " + e);
+                fila[4] = "Error";
+            }
+
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
         }
     }
     

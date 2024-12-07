@@ -4,20 +4,33 @@
  */
 package com.mycompany.programacion_proyectofinal;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
 /**
  *
  * @author sasuk
  */
 public class Mostrar_productos extends javax.swing.JPanel implements ActionListener {
-
+    private final String ARCHIVO_JSON = "productos.json";
     /**
      * Se inicializan los elementos de la interfaz
      */
-    public Mostrar_productos() {
+    public Mostrar_productos(List<Producto> productos) {
         initComponents();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
+        agregarTabla(productos);
     }
 
     /**
@@ -168,6 +181,38 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+
+    /**
+     * Agrega una fila a la tabla de productos del archivo JSON
+     * @param productos
+     */
+    public void agregarTabla(List<Producto> productos) {
+        for(Producto producto: productos) {
+            Object[] fila = new Object[5];
+            fila[0] = String.valueOf(producto.getClave());
+            fila[1] = producto.getNombre();
+            fila[2] = String.valueOf(producto.getCantidad());
+            fila[3] = String.valueOf(producto.getPrecio());
+
+            try {
+                byte[] imagenProducto = producto.getImagen();
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+
+                if (bufferedImage != null) {
+                    ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+                    fila[4] = new JLabel(mFoto);
+                } else {
+                    fila[4] = "Espero que nunca pase esto";
+                }
+            } catch (Exception e) {
+                System.out.println("Error al procesar la imagen: " + e);
+                fila[4] = "Error";
+            }
+
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -28,15 +28,10 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     /**
      * Se inicializan los elementos de la interfaz
      */
-    public Agregar_productos() {
+    public Agregar_productos(List<Producto> productos) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
-        try {
-            productos = cargarProductosDesdeArchivo();
-        } catch (Exception e) {
-            productos = new ArrayList<>();
-        }
-        clave_t.setText(generarClave());
+        agregarTabla(productos);
     }
 
     /**
@@ -348,31 +343,33 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
     /**
      * Agrega una fila a la tabla de productos del archivo JSON
-     * @param producto
+     * @param productos
      */
-    public void agregarTabla(Producto producto) {
-        Object[] fila = new Object[5];
-        fila[0] = String.valueOf(producto.getClave());
-        fila[1] = producto.getNombre();
-        fila[2] = String.valueOf(producto.getCantidad());
-        fila[3] = String.valueOf(producto.getPrecio());
+    public void agregarTabla(List<Producto> productos) {
+        for(Producto producto: productos) {
+            Object[] fila = new Object[5];
+            fila[0] = String.valueOf(producto.getClave());
+            fila[1] = producto.getNombre();
+            fila[2] = String.valueOf(producto.getCantidad());
+            fila[3] = String.valueOf(producto.getPrecio());
 
-        try {
-            byte[] imagenProducto = producto.getImagen();
-            BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+            try {
+                byte[] imagenProducto = producto.getImagen();
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
 
-            if (bufferedImage != null) {
-                ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-                fila[4] = new JLabel(mFoto);
-            } else {
-                fila[4] = "Espero que nunca pase esto";
+                if (bufferedImage != null) {
+                    ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+                    fila[4] = new JLabel(mFoto);
+                } else {
+                    fila[4] = "Espero que nunca pase esto";
+                }
+            } catch (Exception e) {
+                System.out.println("Error al procesar la imagen: " + e);
+                fila[4] = "Error";
             }
-        } catch (Exception e) {
-            System.out.println("Error al procesar la imagen: " + e);
-            fila[4] = "Error";
-        }
 
-        ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+        }
     }
 
     /**
@@ -408,7 +405,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     /**
      * Obtiene el arreglo de bytes de la imagen por medio de su ruta en el sistema
      * @param ruta
-     * @return 
+     * @return arreglo de bytes de la imagen
      */
     private byte[] getImagen(String ruta){
         File imagen = new File(ruta);
@@ -449,43 +446,6 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
 
-    /**metodo para agregar los productos del archivo a la lista
-     *Decodifica de base 64 la imagen
-     * @return productos que es una lista
-     */
-    public List<Producto> cargarProductosDesdeArchivo() {
-        List<Producto> productos = new ArrayList<>();
-        File archivo = new File(ARCHIVO_JSON);
-
-        if (archivo.exists()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(archivo))) {
-                StringBuilder contenido = new StringBuilder();
-                String linea;
-                while ((linea = reader.readLine()) != null) {
-                    contenido.append(linea);
-                }
-                 //
-                JSONArray jsonArray = new JSONArray(contenido.toString());
-                for (int i = 0; i < jsonArray.length(); i++) {
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    byte[] imagenProducto = Base64.getDecoder().decode(jsonObject.getString("Imagen"));
-                    Producto producto = new Producto(
-                            jsonObject.getInt("Clave"),
-                            jsonObject.getString("Nombre"),
-                            jsonObject.getInt("Cantidad"),
-                            jsonObject.getDouble("Precio"),
-                            imagenProducto
-                    );
-                    productos.add(producto);
-                    agregarTabla(producto);
-                }
-            } catch (IOException e) {
-                System.err.println("Error al leer el archivo JSON: " + e.getMessage());
-            }
-        }
-
-        return productos;
-    }
 
     public void buscarProducto(){
         for(Producto p : productos){
