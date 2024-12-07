@@ -63,6 +63,7 @@ public class Eliminar_productos extends javax.swing.JPanel {
         guardar.setBackground(new java.awt.Color(35, 135, 55));
         guardar.setForeground(new java.awt.Color(255, 255, 255));
         guardar.setText("Guardar Cambios");
+        guardar.addActionListener(this);
 
         agregar_seccion.setBackground(new java.awt.Color(237, 240, 242));
 

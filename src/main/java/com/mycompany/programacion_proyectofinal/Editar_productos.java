@@ -233,6 +233,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         guardar.setBackground(new java.awt.Color(35, 135, 55));
         guardar.setForeground(new java.awt.Color(255, 255, 255));
         guardar.setText("Guardar Cambios");
+        guardar.addActionListener(this);
 
         javax.swing.GroupLayout principalLayout = new javax.swing.GroupLayout(principal);
         principal.setLayout(principalLayout);
@@ -242,12 +243,11 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                 .addComponent(agregar_seccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(principalLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(principalLayout.createSequentialGroup()
-                        .addComponent(guardar)
-                        .addGap(18, 18, 18))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(guardar)))
+                .addContainerGap())
         );
         principalLayout.setVerticalGroup(
             principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
