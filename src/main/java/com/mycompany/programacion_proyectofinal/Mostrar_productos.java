@@ -218,7 +218,23 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actionPerformed(ActionEvent evt) {
+        if(evt.getSource() == orden_default){
+
+        }
+        if(evt.getSource() == orden_nombre){
+            //quickSort
+        }
+        if(evt.getSource() == orden_precio){
+            //mergeSort
+        }
+    }
+
+    public void ordenQuickSort(){
+
+    }
+
+    public void ordenMergeSort(){
+
     }
 }
