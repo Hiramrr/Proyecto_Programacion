@@ -73,7 +73,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "Cantidad", "Precio", "Imagen"

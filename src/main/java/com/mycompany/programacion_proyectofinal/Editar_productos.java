@@ -212,7 +212,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "Cantidad", "Precio", "Imagen"
@@ -246,7 +246,6 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 809, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(principalLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(guardar)
                         .addGap(18, 18, 18))))
         );
