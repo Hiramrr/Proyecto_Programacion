@@ -73,6 +73,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         eliminar.setBackground(new java.awt.Color(184, 44, 0));
         eliminar.setForeground(new java.awt.Color(255, 255, 255));
         eliminar.setText("Eliminar");
+        eliminar.addActionListener(this);
 
         titulo.setBackground(new java.awt.Color(1, 52, 87));
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N

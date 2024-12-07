@@ -227,6 +227,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="eliminar.addActionListener(this);"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="titulo">
               <Properties>
