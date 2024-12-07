@@ -383,9 +383,10 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         String cantidad = cantidad_t.getText();
         String precio = precio_t.getText();
         byte[] imagen = getImagen(ruta);
-
+        Image imagenBuena = new ImageIcon(imagen).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        Object[] fila = {clave, nombre, cantidad, precio, new JLabel(new ImageIcon(imagenBuena))};
+        ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
         Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
-
         agregarProductoAlArchivo(p);
     }
 
@@ -436,13 +437,12 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             json.put("Nombre", prod.getNombre());
             json.put("Precio", prod.getPrecio());
             json.put("Cantidad", prod.getCantidad());
-            json.put("Imagen", Base64.getEncoder().encodeToString(prod.getImagen())); // Codifica la imagen
+            json.put("Imagen", Base64.getEncoder().encodeToString(prod.getImagen()));
             jsonArray.put(json);
         }
 
         try (FileWriter file = new FileWriter(ARCHIVO_JSON)) {
-            file.write(jsonArray.toString(4)); // Formateado con 4 espacios
-            System.out.println("Producto agregado al archivo: " + producto);
+            file.write(jsonArray.toString(4));
         } catch (IOException e) {
             System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
         }
