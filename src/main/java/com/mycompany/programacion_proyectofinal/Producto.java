@@ -10,14 +10,15 @@ public class Producto {
     private double precio;
     public byte[]imagen;
 
-    public Producto(int id, String nombre, double precio) {
+    public Producto(int id, String nombre,double cantidad, double precio) {
     }
 
-    public Producto(int clave, String nombre, int cantidad, double precio) {
+    public Producto(int clave, String nombre, int cantidad, double precio, byte[] imagen) {
         this.clave = clave;
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio = precio;
+        this.imagen = imagen;
     }
 
     public int getClave() {
