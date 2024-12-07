@@ -24,11 +24,13 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     String ruta;
     List<Producto> productos;
     private final String ARCHIVO_JSON = "productos.json";
+
     /**
      * Se inicializan los elementos de la interfaz
      */
     public Agregar_productos() {
         initComponents();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
         try {
             productos = cargarProductosDesdeArchivo();
         } catch (Exception e) {
@@ -348,8 +350,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * @param producto
      */
     public void agregarTabla(Producto producto) {
-        tabla.setDefaultRenderer(Object.class, new RenderImagen());
-        Object[] fila = new Object[5]; // Cambiado a Object[]
+        Object[] fila = new Object[5];
         fila[0] = String.valueOf(producto.getClave());
         fila[1] = producto.getNombre();
         fila[2] = String.valueOf(producto.getCantidad());
@@ -384,6 +385,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         byte[] imagen = getImagen(ruta);
 
         Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
+
         agregarProductoAlArchivo(p);
     }
 
@@ -424,8 +426,6 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * @param producto
      */
     public void agregarProductoAlArchivo(Producto producto) {
-
-
         productos.add(producto);
 
         // Convertir lista a JSON y guardar en el archivo
