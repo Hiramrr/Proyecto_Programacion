@@ -4,11 +4,14 @@
  */
 package com.mycompany.programacion_proyectofinal;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  *
  * @author sasuk
  */
-public class Mostrar_productos extends javax.swing.JPanel {
+public class Mostrar_productos extends javax.swing.JPanel implements ActionListener {
 
     /**
      * Se inicializan los elementos de la interfaz
@@ -165,4 +168,9 @@ public class Mostrar_productos extends javax.swing.JPanel {
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
