@@ -1,15 +1,26 @@
 package com.mycompany.programacion_proyectofinal;
+
+import java.util.List;
+
 /**
  * @author miche
  * */
 public class Arbol {
-    private Nodo raiz;
+    private static Nodo raiz;
 
-    public void agregar(Producto producto) {
+    public static Nodo getRaiz() {
+        return raiz;
+    }
+
+    public static void setRaiz(Nodo raiz) {
+        Arbol.raiz = raiz;
+    }
+
+    public static void agregar(Producto producto) {
         raiz = agregarRecursivo(raiz, producto);
     }
 
-    private Nodo agregarRecursivo(Nodo actual, Producto producto) {
+    private static Nodo agregarRecursivo(Nodo actual, Producto producto) {
         if (actual == null) {
             return new Nodo(producto);
         }
@@ -26,12 +37,27 @@ public class Arbol {
     public void inOrden() {
         inOrdenRecursivo(raiz);
     }
-
+    /**
+     * metodo para imprimir el arbol inOrden
+     *
+     * @param nodo
+     * */
     private void inOrdenRecursivo(Nodo nodo) {
         if (nodo != null) {
             inOrdenRecursivo(nodo.izquierdo);
             System.out.println(nodo.producto);
             inOrdenRecursivo(nodo.derecho);
+        }
+    }
+    /**
+     * Metodo para construir el arbol apartir de la lista
+     *
+     * @param productos
+     */
+    public static void construirDesdeLista(List<Producto> productos) {
+        raiz = null; // Limpiar el árbol
+        for (Producto producto : productos) {
+            agregar(producto);
         }
     }
 

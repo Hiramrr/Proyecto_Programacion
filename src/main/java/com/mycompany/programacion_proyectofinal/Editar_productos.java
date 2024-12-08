@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -362,5 +363,53 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         if(evt.getSource() == cargar){
             cargarImagen();
         }
+    }
+
+    static Scanner s = new Scanner(System.in);
+    /**
+     * Metodo para editrar productos
+     *
+     * @param clave
+     * */
+    public static void editarProducto(int clave) {
+        List<Producto> productos = Agregar_productos.cargarProductosDesdeArchivo();
+
+        // Buscar el producto
+        Producto productoAEditar = null;
+        for (Producto producto : productos) {
+            if (producto.getClave() == clave) {
+                productoAEditar = producto;
+                break;
+            }
+        }
+
+        if (productoAEditar == null) {
+            System.out.println("Producto con clave " + clave + " no encontrado.");
+            return;
+        }
+
+        // Editar producto
+        System.out.println("Editando producto: " + productoAEditar);
+        System.out.print("Nuevo nombre (actual: " + productoAEditar.getNombre() + "): ");
+        String nuevoNombre = s.nextLine();
+        System.out.print("Nuevo precio (actual: " + productoAEditar.getPrecio() + "): ");
+        double nuevoPrecio = s.nextDouble();
+        s.nextLine();
+        System.out.print("Nueva cantidad (actual: " + productoAEditar.getPrecio() + "): ");
+        int nuevaCantidad = s.nextInt();
+        s.nextLine();
+
+        // Actualizar los valores
+        productoAEditar.setNombre(nuevoNombre);
+        productoAEditar.setPrecio(nuevoPrecio);
+        productoAEditar.setCantidad(nuevaCantidad);
+
+        // Guardar los cambios en el archivo JSON
+        Agregar_productos.agregarProductoAlArchivo(productoAEditar);
+        System.out.println("Producto actualizado con éxito.");
+
+        Arbol.construirDesdeLista(productos);
+
+        // agregar ventana para confirmar los cambios y que se realicen los cambios
     }
 }
