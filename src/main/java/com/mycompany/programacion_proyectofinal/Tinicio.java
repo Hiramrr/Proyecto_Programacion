@@ -342,7 +342,17 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == eliminar){
-            Eliminar_productos eliminar_p = new Eliminar_productos(productos);
+            if(productos.isEmpty()){
+                Eliminar_productos eliminar_p = new Eliminar_productos(productos);
+                eliminar_p.setLocation(0, 0);
+                eliminar_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+                contenido.removeAll();
+                contenido.add(eliminar_p,BorderLayout.CENTER);
+                contenido.revalidate();
+                contenido.repaint();
+            }
+            Eliminar_productos eliminar_p = new Eliminar_productos(productos, arbol);
             eliminar_p.setLocation(0, 0);
             eliminar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -381,11 +391,20 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         this.historial.push(mensaje);
     }
 
-    public void generarArbol(){
-        arbol.construirDesdeLista(productos);
+    public void actualizarLista(){
+        try {
+            productos = cargarProductosDesdeArchivo();
+            arbol.construirDesdeLista(productos);
+        } catch (Exception e) {
+            productos = new ArrayList<>();
+        }
     }
 
     public void añadirAlArbol(ArrayList<Producto> producto){
+        if(arbol.getRaiz() == null){
+            arbol.construirDesdeLista(producto);
+            return;
+        }
         for(Producto p: producto){
             arbol.agregar(p);
         }

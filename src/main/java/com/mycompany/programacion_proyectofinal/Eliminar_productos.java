@@ -22,16 +22,34 @@ import java.util.List;
  */
 public class Eliminar_productos extends javax.swing.JPanel implements ActionListener {
     private final String ARCHIVO_JSON = "productos.json";
+    Arbol arbol = new Arbol();
+    ArrayList<Integer> eliminados = new ArrayList<>();
+    List<Producto> productos = new ArrayList<>();
+    List<Producto> productosFinales = new ArrayList<>();
+    ArrayList<String> productosEliminados = new ArrayList<>();
 
     /**
      * Creates new form Eliminar_Productos
      */
+    public Eliminar_productos(List<Producto> productos,Arbol arbol) {
+        initComponents();
+        fecha_hoy();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
+        agregarTabla(productos);
+        agregarListenerSeleccionTabla();
+        this.arbol = arbol;
+        this.productos = productos;
+        this.productosFinales = new ArrayList<>();
+    }
+
     public Eliminar_productos(List<Producto> productos) {
         initComponents();
         fecha_hoy();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
         agregarTabla(productos);
         agregarListenerSeleccionTabla();
+        this.productos = productos;
+        this.productosFinales = new ArrayList<>();
     }
 
     /**
@@ -291,30 +309,103 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         }
     }
 
+    /**
+     * maneja los eventos de los botones
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == eliminar){
-            //eliminarProducto();
+            String nombre = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
+            eliminarProducto();
+            String clave = clave_t.getText();
+            String fecha = fecha_t.getText();
+            String razon = razon_t.getText();
+            productosEliminados.add("Clave: " + clave);
+            productosEliminados.add("Nombre del producto: " + nombre);
+            productosEliminados.add("Fecha: " + fecha);
+            productosEliminados.add("Razon: " + razon);
+            productosEliminados.add(" ");
         } else if(evt.getSource() == guardar){
-            //guardarCambios();
+            guardarCambios();
         }
     }
 
-
+    /**
+     * Elimina un producto de la tabla
+     */
     public void eliminarProducto() {
         int clave = Integer.parseInt(clave_t.getText());
-        Producto producto = Buscar_productos.buscarProductoEnABB(clave);
-        if(producto != null) {
+        Buscar_productos aux = new Buscar_productos();
+        Producto producto = aux.buscarProductoEnABB(clave);
 
-            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+        if (producto != null) {
+            int indice = -1;
+            for (int i = 0; i < productos.size(); i++) {
+                if (productos.get(i).getClave() == clave) {
+                    indice = i;
+                    break;
+                }
+            }
+            if (indice != -1) {
+                eliminados.add(clave);
+                productos.remove(indice);
+                ((javax.swing.table.DefaultTableModel) tabla.getModel()).removeRow(tabla.getSelectedRow()); // Eliminar visualmente
+                JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Producto no encontrado");
         }
     }
 
-    /**
-     * Agrega un listener a la tabla
+    /*
+    *Actualiza la clave de los productos en la tabla
      */
+
+
+
+    /**
+     * Guarda los cambios en el archivo JSON
+     */
+    public void guardarCambios() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (int i = 0; i < productos.size(); i++) {
+            Producto producto = productos.get(i);
+            producto.setClave(i + 1);
+
+            JSONObject json = new JSONObject();
+            json.put("Clave", producto.getClave());
+            json.put("Nombre", producto.getNombre());
+            json.put("Precio", producto.getPrecio());
+            json.put("Cantidad", producto.getCantidad());
+            json.put("Imagen", Base64.getEncoder().encodeToString(producto.getImagen()));
+            jsonArray.put(json);
+        }
+
+        try (FileWriter file = new FileWriter(ARCHIVO_JSON, false)) {
+            file.write(jsonArray.toString(4));
+            guardarArchivoEliminados();
+            JOptionPane.showMessageDialog(null, "Cambios guardados correctamente");
+        } catch (IOException e) {
+            System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
+        }
+    }
+
+    public void guardarArchivoEliminados() {
+        try (BufferedWriter datos = new BufferedWriter(new FileWriter("RegistroEliminados.txt", true))) {
+            for (String producto : productosEliminados) {
+                datos.write(producto);
+                datos.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Espero nunca pase eso");
+        }
+    }
+
+
+        /**
+         * Agrega un listener a la tabla
+         */
     private void agregarListenerSeleccionTabla() {
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

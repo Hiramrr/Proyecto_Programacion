@@ -7,10 +7,10 @@ import java.util.*;
 
 /**
  *
- * @author cinom
+ * @author hiram
  */
 public class Buscar_productos extends javax.swing.JPanel {
-
+    Arbol arbol = new Arbol();
     /**
      * Creates new form Buscar_productos
      */
@@ -161,8 +161,8 @@ public class Buscar_productos extends javax.swing.JPanel {
      * @param clave la clave del producto a buscar
      * @return el producto encontrado o null si no existe
      */
-    public static Producto buscarProductoEnABB(int clave) {
-        return buscarRecursivo(Arbol.getRaiz(), clave);
+    public Producto buscarProductoEnABB(int clave) {
+        return buscarRecursivo(arbol.getRaiz(), clave);
     }
 
     private static Producto buscarRecursivo(Nodo nodo, int clave) {
