@@ -24,6 +24,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     List<Producto> productos = new ArrayList<Producto>();
     Arbol arbol = new Arbol();
     boolean esNumero = true;
+    byte[] imagenProducto;
 
     /**
      * Creates new form Editar_productos
@@ -35,6 +36,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         agregarTabla(productos);
         agregarListenerNumeros();
         agregarListenerSeleccionTabla();
+        this.imagenProducto = imagenProducto;
     }
 
     /**
@@ -375,7 +377,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         }
     }
 
-    static Scanner s = new Scanner(System.in);
+
     /**
      * Metodo para editrar productos
      *
@@ -391,22 +393,11 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                 break;
             }
         }
-
-        if (productoAEditar == null) {
-            System.out.println("Producto con clave " + clave + " no encontrado.");
-            return;
-        }
-
-        // Editar producto
-        System.out.println("Editando producto: " + productoAEditar);
-        System.out.print("Nuevo nombre (actual: " + productoAEditar.getNombre() + "): ");
-        String nuevoNombre = s.nextLine();
-        System.out.print("Nuevo precio (actual: " + productoAEditar.getPrecio() + "): ");
-        double nuevoPrecio = s.nextDouble();
-        s.nextLine();
-        System.out.print("Nueva cantidad (actual: " + productoAEditar.getPrecio() + "): ");
-        int nuevaCantidad = s.nextInt();
-        s.nextLine();
+        ArrayList<Producto> productoEditado = new ArrayList<>();
+        String nuevoNombre = nombre_t.getText();
+        int nuevaCantidad = Integer.parseInt(cantidad_t.getText());
+        double nuevoPrecio = Double.parseDouble(precio_t.getText());
+        Image foto = new ImageIcon(imagenProducto).getImage();
 
         // Actualizar los valores
         productoAEditar.setNombre(nuevoNombre);
@@ -487,6 +478,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     private void agregarListenerSeleccionTabla() {
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+
             public void mouseClicked(java.awt.event.MouseEvent evt) {
 
                 int filaSeleccionada = tabla.getSelectedRow();
@@ -503,7 +495,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                             .orElse(null);
 
                     if (productoSeleccionado != null) {
-                        byte[] imagenProducto = productoSeleccionado.getImagen();
+                        imagenProducto = productoSeleccionado.getImagen();
                         BufferedImage bufferedImage = null;
                         try {
                             bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
