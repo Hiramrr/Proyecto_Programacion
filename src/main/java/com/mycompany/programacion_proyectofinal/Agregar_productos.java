@@ -29,18 +29,20 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     private final String ARCHIVO_JSON = "productos.json";
     ArrayList<Producto> productosNuevos = new ArrayList<>();
     boolean esNumero = false;
+    Arbol arbol;
 
     /**
      * Se inicializan los elementos de la interfaz
      * @param productos
      */
-    public Agregar_productos(List<Producto> productos) {
+    public Agregar_productos(List<Producto> productos,Arbol arbol) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
         agregarTabla(productos);
         clave_t.setText(generarClave());
         this.productos = productos;
         agregarListenerNumeros();
+        this.arbol = arbol;
     }
 
     /**
@@ -399,6 +401,18 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             Producto p = new Producto(clave, nombre, cantidad, precio, imagen);
             productosNuevos.add(p);
         }
+        vaciarCampos();
+    }
+
+    /**
+     * Vacia los campos de texto y la imagen
+     */
+    public void vaciarCampos(){
+        clave_t.setText(generarClave());
+        nombre_t.setText("");
+        cantidad_t.setText("");
+        precio_t.setText("");
+        imagen.setIcon(null);
     }
 
     /**
@@ -436,7 +450,10 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             validar();
         }
         if(evt.getSource() == guardar){
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
             guardarCambios();
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
+            System.out.println("Se han agregado al arbol");
         }
     }
 
@@ -444,11 +461,11 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * Guarda los productos nuevos en el archivo JSON
      */
     public void guardarCambios(){
+
         for(Producto producto: productosNuevos){
             agregarProductoAlArchivo(producto);
         }
-        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
-        ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
+        productosNuevos.clear();
     }
 
 

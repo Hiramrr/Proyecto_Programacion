@@ -3,3 +3,8 @@ Nombre del producto: Premios para gato
 Fecha: 08/12/2024
 Razon: Se elimino este producto porque no tiene imagen
  
+Clave: 5
+Nombre del producto: Bebedero para colibries
+Fecha: 08/12/2024
+Razon: 
+ 

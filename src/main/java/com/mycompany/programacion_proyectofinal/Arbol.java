@@ -53,6 +53,8 @@ public class Arbol {
         }
         return resultado;
     }
+
+
     /**
      * Metodo para construir el arbol apartir de la lista
      *

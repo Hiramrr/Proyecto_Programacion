@@ -200,7 +200,7 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
 
 
     /**
-     * Agrega una fila a la tabla de productos del archivo JSON
+     * Agrega las filas necesarias a la tabla de productos utilizando la lista de productos
      * @param productos
      */
     public void agregarTabla(List<Producto> productos) {
@@ -231,19 +231,25 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
 
+    /**
+     * Maneja los eventos de los botones
+     * @param evt
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == orden_default){
             inOrden();
         }
         if(evt.getSource() == orden_nombre){
-            ordenQuickSort(this.productos, 0, this.productos.size() - 1);
-            agregarTabla(this.productos);
+            List<Producto> productosAux = new ArrayList<>(this.productos);
+            ordenQuickSort(productosAux, 0, productosAux.size() - 1);
+            agregarTabla(productosAux);
 
         }
         if(evt.getSource() == orden_precio){
-            ordenMergeSort(this.productos, 0, this.productos.size() - 1);
-            agregarTabla(this.productos);
+            List<Producto> productosAux = new ArrayList<>(this.productos);
+            ordenMergeSort(productosAux, 0, productosAux.size() - 1);
+            agregarTabla(productosAux);
         }
     }
 

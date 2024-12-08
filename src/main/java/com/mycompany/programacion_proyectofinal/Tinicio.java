@@ -302,7 +302,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == agregar){
-            Agregar_productos agregar_P = new Agregar_productos(productos);
+            Agregar_productos agregar_P = new Agregar_productos(productos, arbol);
             agregar_P.setLocation(0, 0);
             agregar_P.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -408,5 +408,6 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         for(Producto p: producto){
             arbol.agregar(p);
         }
+
     }
 }
