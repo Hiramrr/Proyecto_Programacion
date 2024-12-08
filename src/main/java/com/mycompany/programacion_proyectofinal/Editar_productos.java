@@ -5,11 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -20,6 +23,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     String ruta;
     List<Producto> productos = new ArrayList<Producto>();
     Arbol arbol = new Arbol();
+    boolean esNumero = true;
 
     /**
      * Creates new form Editar_productos
@@ -29,6 +33,8 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
         this.productos = productos;
         agregarTabla(productos);
+        agregarListenerNumeros();
+        agregarListenerSeleccionTabla();
     }
 
     /**
@@ -413,5 +419,101 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         arbol.construirDesdeLista(productos);
 
         // agregar ventana para confirmar los cambios y que se realicen los cambios
+    }
+
+    /**
+     * Agrega un listener a los campos de texto para verificar que solo se ingresen numeros
+     */
+    private void agregarListenerNumeros() {
+        cantidad_t.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                esNumeroCantidad();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                esNumeroCantidad();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                esNumeroCantidad();
+            }
+        });
+        precio_t.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                esNumeroPrecio();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                esNumeroPrecio();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                esNumeroPrecio();
+            }
+        });
+    }
+
+
+    /**
+     * Verifica si el texto ingresado en la cantidad es un numero
+     */
+    public void esNumeroCantidad() {
+        try {
+            if (!cantidad_t.getText().isEmpty()) {
+                int cantidad = Integer.parseInt(cantidad_t.getText());
+                esNumero = true;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido en los campos de cantidad");
+            esNumero = false;
+        }
+    }
+
+    /**
+     * Verifica si el texto ingresado en la precio es un numero
+     */
+    public void esNumeroPrecio() {
+        try {
+            if (!precio_t.getText().isEmpty()) {
+                double precio = Double.parseDouble(precio_t.getText());
+                esNumero = true;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido en los campos de precio");
+            esNumero = false;
+        }
+    }
+
+    private void agregarListenerSeleccionTabla() {
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                int filaSeleccionada = tabla.getSelectedRow();
+
+                if (filaSeleccionada != -1) {
+                    clave_t.setText(tabla.getValueAt(filaSeleccionada, 0).toString());
+                    nombre_t.setText(tabla.getValueAt(filaSeleccionada, 1).toString());
+                    cantidad_t.setText(tabla.getValueAt(filaSeleccionada, 2).toString());
+                    precio_t.setText(tabla.getValueAt(filaSeleccionada, 3).toString());
+                    int clave = Integer.parseInt(clave_t.getText());
+                    Producto productoSeleccionado = productos.stream()
+                            .filter(producto -> producto.getClave() == clave)
+                            .findFirst()
+                            .orElse(null);
+
+                    if (productoSeleccionado != null) {
+                        byte[] imagenProducto = productoSeleccionado.getImagen();
+                        BufferedImage bufferedImage = null;
+                        try {
+                            bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        ImageIcon icono = new ImageIcon(bufferedImage.getScaledInstance(imagen.getWidth(), imagen.getHeight(), Image.SCALE_SMOOTH));
+                        imagen.setIcon(icono);
+                    }
+                }
+            }
+        });
     }
 }
