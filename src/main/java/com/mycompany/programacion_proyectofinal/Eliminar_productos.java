@@ -397,6 +397,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
                 datos.write(producto);
                 datos.newLine();
             }
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial.add("Se eliminaron productos");
         } catch (IOException e) {
             System.out.println("Espero nunca pase eso");
         }

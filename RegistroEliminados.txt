@@ -1,5 +1,5 @@
 Clave: 3
 Nombre del producto: Premios para gato
 Fecha: 08/12/2024
-Razon: Se Elimino este producto porque no tiene imagen
+Razon: Se elimino este producto porque no tiene imagen
  
