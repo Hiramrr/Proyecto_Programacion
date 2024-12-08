@@ -19,6 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Editar_productos extends javax.swing.JPanel implements ActionListener {
     String ruta;
     List<Producto> productos = new ArrayList<Producto>();
+    Arbol arbol = new Arbol();
 
     /**
      * Creates new form Editar_productos
@@ -409,7 +410,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         //Agregar_productos.agregarProductoAlArchivo(productoAEditar);
         System.out.println("Producto actualizado con éxito.");
 
-        Arbol.construirDesdeLista(productos);
+        arbol.construirDesdeLista(productos);
 
         // agregar ventana para confirmar los cambios y que se realicen los cambios
     }

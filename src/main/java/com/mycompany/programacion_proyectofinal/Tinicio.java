@@ -400,14 +400,13 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         }
     }
 
-    public void añadirAlArbol(ArrayList<Producto> producto){
-        if(arbol.getRaiz() == null){
-            arbol.construirDesdeLista(producto);
-            return;
+    public void añadirAlArbol(ArrayList<Producto> productosNuevos) {
+        if (arbol.getRaiz() == null) {
+            arbol.construirDesdeLista(productosNuevos);
+        } else {
+            for (Producto producto : productosNuevos) {
+                arbol.agregar(producto);
+            }
         }
-        for(Producto p: producto){
-            arbol.agregar(p);
-        }
-
     }
 }

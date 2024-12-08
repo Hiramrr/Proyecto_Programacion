@@ -31,8 +31,9 @@ public class Arbol {
             actual.izquierdo = agregarRecursivo(actual.izquierdo, producto);
         } else if (producto.getClave() > actual.producto.getClave()) {
             actual.derecho = agregarRecursivo(actual.derecho, producto);
+        } else {
+            return actual;
         }
-
         return actual;
     }
 
@@ -60,8 +61,7 @@ public class Arbol {
      *
      * @param productos
      */
-    public static void construirDesdeLista(List<Producto> productos) {
-        raiz = null; // Limpiar el árbol
+    public void construirDesdeLista(List<Producto> productos) {
         for (Producto producto : productos) {
             agregar(producto);
         }

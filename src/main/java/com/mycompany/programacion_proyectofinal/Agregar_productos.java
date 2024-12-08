@@ -450,10 +450,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             validar();
         }
         if(evt.getSource() == guardar){
-            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
             guardarCambios();
-            ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
-            System.out.println("Se han agregado al arbol");
         }
     }
 
@@ -466,6 +463,9 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             agregarProductoAlArchivo(producto);
         }
         productosNuevos.clear();
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
+        JOptionPane.showMessageDialog(null, "Se han guardado los cambios");
     }
 
 
