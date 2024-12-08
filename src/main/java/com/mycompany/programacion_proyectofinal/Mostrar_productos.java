@@ -24,13 +24,17 @@ import java.util.List;
  */
 public class Mostrar_productos extends javax.swing.JPanel implements ActionListener {
     private final String ARCHIVO_JSON = "productos.json";
+    List<Producto> productos = new ArrayList<>();
+    List<Producto> productosOriginal = new ArrayList<>();
     /**
      * Se inicializan los elementos de la interfaz
      */
     public Mostrar_productos(List<Producto> productos) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
-        agregarTabla(productos);
+        this.productos = productos;
+        this.productosOriginal = new ArrayList<>(productos);
+        agregarTabla(this.productos);
     }
 
     /**
@@ -191,6 +195,7 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
      * @param productos
      */
     public void agregarTabla(List<Producto> productos) {
+        ((javax.swing.table.DefaultTableModel) tabla.getModel()).setRowCount(0);
         for(Producto producto: productos) {
             Object[] fila = new Object[5];
             fila[0] = String.valueOf(producto.getClave());
@@ -220,21 +225,78 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == orden_default){
-
+            agregarTabla(productosOriginal);
         }
         if(evt.getSource() == orden_nombre){
             //quickSort
         }
         if(evt.getSource() == orden_precio){
-            //mergeSort
+            List<Producto> productosPrecio = this.productos;
+            ordenMergeSort(productosPrecio,0, productosPrecio.size() - 1);
+            agregarTabla(productosPrecio);
         }
     }
 
+
+    /**
+     * Ordena la tabla usando quicksort
+     * ordena por nombre
+     */
     public void ordenQuickSort(){
 
     }
 
-    public void ordenMergeSort(){
+    /**
+     * Ordena la tabla usando mergesort
+     * ordena por precio
+     */
+    public void ordenMergeSort(List<Producto> arr, int izq, int der){
+        if(izq < der) {
+            int mid = (izq + der) / 2;
+            ordenMergeSort(arr,izq, mid);
+            ordenMergeSort(arr,mid + 1, der);
+            merge(arr,izq, mid, der);
+        }
+    }
 
+    public void merge(List<Producto> arr, int izq, int mid, int der){
+        int n1 = mid - izq + 1;
+        int n2 = der - mid;
+
+        Producto[] L = new Producto[n1];
+        Producto[] R = new Producto[n2];
+
+        for(int i = 0; i < n1; i++){
+            L[i] = arr.get(izq + i);
+        }
+        for(int j = 0; j < n2; j++){
+            R[j] = arr.get(mid + 1 + j);
+        }
+
+        int i = 0, j = 0;
+
+        int k = izq;
+        while(i < n1 && j < n2){
+            if(L[i].getPrecio() <= R[j].getPrecio()){
+                arr.set(k, L[i]);
+                i++;
+            } else {
+                arr.set(k, R[j]);
+                j++;
+            }
+            k++;
+        }
+
+        while (i < n1) {
+            arr.set(k,L[i]);
+            i++;
+            k++;
+        }
+
+        while (j < n2) {
+            arr.set(k,R[j]);
+            j++;
+            k++;
+        }
     }
 }

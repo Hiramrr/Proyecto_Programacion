@@ -40,6 +40,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         historial("Se ha iniciado sesion!");
         try {
             productos = cargarProductosDesdeArchivo();
+            crearArbol();
         } catch (Exception e) {
             productos = new ArrayList<>();
         }
@@ -292,6 +293,13 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         return productos;
     }
 
+    public void crearArbol(){
+        Arbol arbol = new Arbol();
+        for (Producto producto : productos) {
+            arbol.agregar(producto);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == agregar){
@@ -335,7 +343,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == buscar){
-            Buscar_productos buscar_p = new Buscar_productos(productos);
+            Buscar_productos buscar_p = new Buscar_productos();
             buscar_p.setLocation(0, 0);
             buscar_p.setSize(contenido.getWidth(), contenido.getHeight());
 

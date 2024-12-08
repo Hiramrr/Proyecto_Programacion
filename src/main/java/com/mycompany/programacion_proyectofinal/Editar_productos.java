@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Editar_productos extends javax.swing.JPanel implements ActionListener {
     String ruta;
+    List<Producto> productos = new ArrayList<Producto>();
 
     /**
      * Creates new form Editar_productos
@@ -25,6 +26,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     public Editar_productos(List<Producto> productos) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
+        this.productos = productos;
         agregarTabla(productos);
     }
 
@@ -371,8 +373,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
      *
      * @param clave
      * */
-    public static void editarProducto(int clave) {
-        List<Producto> productos = Agregar_productos.cargarProductosDesdeArchivo();
+    public void editarProducto(int clave) {
 
         // Buscar el producto
         Producto productoAEditar = null;
@@ -405,7 +406,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         productoAEditar.setCantidad(nuevaCantidad);
 
         // Guardar los cambios en el archivo JSON
-        Agregar_productos.agregarProductoAlArchivo(productoAEditar);
+        //Agregar_productos.agregarProductoAlArchivo(productoAEditar);
         System.out.println("Producto actualizado con éxito.");
 
         Arbol.construirDesdeLista(productos);
