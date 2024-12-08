@@ -1,7 +1,5 @@
 package com.mycompany.programacion_proyectofinal;
 
-
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -13,20 +11,28 @@ import java.io.*;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
  * @author hiram
  */
+
+/**
+ * Clase que se encarga de agregar productos a la tabla de productos
+ */
 public class Agregar_productos extends javax.swing.JPanel implements ActionListener {
     String ruta;
     List<Producto> productos;
     private final String ARCHIVO_JSON = "productos.json";
     ArrayList<Producto> productosNuevos = new ArrayList<>();
+    boolean esNumero = false;
 
     /**
      * Se inicializan los elementos de la interfaz
+     * @param productos
      */
     public Agregar_productos(List<Producto> productos) {
         initComponents();
@@ -34,6 +40,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         agregarTabla(productos);
         clave_t.setText(generarClave());
         this.productos = productos;
+        agregarListenerNumeros();
     }
 
     /**
@@ -373,26 +380,48 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * Agrega un producto a la tabla de productos
      */
     public void agregarProducto(){
-        String clave = clave_t.getText();
+        int clave = Integer.parseInt(clave_t.getText());
         String nombre = nombre_t.getText();
-        String cantidad = cantidad_t.getText();
-        String precio = precio_t.getText();
+        int cantidad = Integer.parseInt(cantidad_t.getText());
+        double precio = Double.parseDouble(precio_t.getText());
         try {
             byte[] imagen = getImagen(ruta);
             Image imagenBuena = new ImageIcon(imagen).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             Object[] fila = {clave, nombre, cantidad, precio, new JLabel(new ImageIcon(imagenBuena))};
             ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
-            Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
+            Producto p = new Producto(clave, nombre, cantidad, precio, imagen);
             productosNuevos.add(p);
         } catch (NullPointerException e){
             byte[] imagen = getImagen("src/main/java/Resources/Images/default.png");
             Image imagenBuena = new ImageIcon(imagen).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
             Object[] fila = {clave, nombre, cantidad, precio, new JLabel(new ImageIcon(imagenBuena))};
             ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
-            Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
+            Producto p = new Producto(clave, nombre, cantidad, precio, imagen);
             productosNuevos.add(p);
         }
     }
+
+    /**
+     * Valida que los campos no esten vacios y que los campos de cantidad y precio sean numeros
+     * Si todo esta correcto, agrega el producto
+     */
+    public void validar(){
+        if(nombre_t.getText().isEmpty() && cantidad_t.getText().isEmpty() && precio_t.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos");
+            return;
+        }
+        if(nombre_t.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un nombre al producto");
+            return;
+        }
+        if(!esNumero){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido en los campos de cantidad y precio");
+            return;
+        }
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se ha agreado un producto! " + nombre_t.getText());
+        agregarProducto();
+    }
+
 
     /**
     * Maneja las acciones de los botones
@@ -404,20 +433,22 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             cargarImagen();
         }
         if(evt.getSource() == agregar) {
-            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se ha agreado un producto! " + nombre_t.getText());
-            agregarProducto();
+            validar();
         }
         if(evt.getSource() == guardar){
-            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
             guardarCambios();
-            ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
         }
     }
 
+    /**
+     * Guarda los productos nuevos en el archivo JSON
+     */
     public void guardarCambios(){
         for(Producto producto: productosNuevos){
             agregarProductoAlArchivo(producto);
         }
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
     }
 
 
@@ -438,6 +469,72 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             return null;
         }
     }
+
+
+    /**
+     * Agrega un listener a los campos de texto para verificar que solo se ingresen numeros
+     */
+    private void agregarListenerNumeros() {
+        cantidad_t.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                esNumeroCantidad();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                esNumeroCantidad();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                esNumeroCantidad();
+            }
+        });
+        precio_t.getDocument().addDocumentListener(new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                esNumeroPrecio();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                esNumeroPrecio();
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                esNumeroPrecio();
+            }
+        });
+    }
+
+
+    /**
+     * Verifica si el texto ingresado en la cantidad es un numero
+     */
+    public void esNumeroCantidad() {
+        try {
+            if (!cantidad_t.getText().isEmpty()) {
+                int cantidad = Integer.parseInt(cantidad_t.getText());
+                esNumero = true;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido en los campos de cantidad");
+            esNumero = false;
+        }
+    }
+
+    /**
+     * Verifica si el texto ingresado en la precio es un numero
+     */
+    public void esNumeroPrecio() {
+        try {
+            if (!precio_t.getText().isEmpty()) {
+                double precio = Double.parseDouble(precio_t.getText());
+                esNumero = true;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido en los campos de precio");
+            esNumero = false;
+        }
+    }
+
+
     // creacion del archivo json
     /** Metodo para agregar un producto al archivo JSON
      *  Codifica la imagen a base 64 con la clase base 64
