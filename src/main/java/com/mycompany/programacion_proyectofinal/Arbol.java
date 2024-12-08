@@ -8,7 +8,6 @@ import java.util.List;
  * @author miche
  * */
 public class Arbol {
-    List<Producto> productos = new ArrayList<>();
     private static Nodo raiz;
 
     public  Nodo getRaiz() {
@@ -45,13 +44,14 @@ public class Arbol {
      *
      * @param nodo
      * */
-    List<Producto> inOrdenRecursivo(Nodo nodo) {
+    public List<Producto> inOrdenRecursivo(Nodo nodo) {
+        List<Producto> resultado = new ArrayList<>();
         if (nodo != null) {
-            inOrdenRecursivo(nodo.izquierdo);
-            productos.add(nodo.producto);
-            inOrdenRecursivo(nodo.derecho);
+            resultado.addAll(inOrdenRecursivo(nodo.izquierdo));
+            resultado.add(nodo.producto);
+            resultado.addAll(inOrdenRecursivo(nodo.derecho));
         }
-        return productos;
+        return resultado;
     }
     /**
      * Metodo para construir el arbol apartir de la lista

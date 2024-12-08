@@ -17,6 +17,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Locale;
 
 /**
  *
@@ -236,28 +237,67 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
             inOrden();
         }
         if(evt.getSource() == orden_nombre){
-            //quickSort
+            ordenQuickSort(this.productos, 0, this.productos.size() - 1);
+            agregarTabla(this.productos);
+
         }
         if(evt.getSource() == orden_precio){
-            List<Producto> productosPrecio = this.productos;
-            ordenMergeSort(productosPrecio,0, productosPrecio.size() - 1);
-            agregarTabla(productosPrecio);
+            ordenMergeSort(this.productos, 0, this.productos.size() - 1);
+            agregarTabla(this.productos);
         }
     }
 
-
-    public void inOrden(){
-        productos.removeAll(productos);
-        productos = arbol.inOrdenRecursivo(arbol.getRaiz());
+    /**
+     * Método que recorre el arbol en inOrden
+     * o tambien se le puede decir que es por default
+     */
+    public void inOrden() {
+        productos.clear();
+        List<Producto> nuevosProductos = arbol.inOrdenRecursivo(arbol.getRaiz());
+        productos.addAll(nuevosProductos);
         agregarTabla(productos);
     }
+
 
     /**
      * Ordena la tabla usando quicksort
      * ordena por nombre
+     * @param arr: lista de productos
+     * @param low: indice izquierdo
+     * @param high: indice derecho
      */
-    public void ordenQuickSort(){
+    public void ordenQuickSort(List<Producto> arr, int low, int high){
+        if (low < high) {
+            int pi = partition(arr, low, high);
 
+            ordenQuickSort(arr, low, pi - 1);
+            ordenQuickSort(arr, pi + 1, high);
+        }
+
+    }
+
+    /**
+     * Método que particiona la lista
+     * @param arr: lista de productos
+     * @param low: indice izquierdo
+     * @param high: indice derecho
+     * @return
+     */
+    public int partition(List<Producto> arr, int low, int high){
+        String pivot = arr.get(high).getNombre().toLowerCase();
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr.get(j).getNombre().toLowerCase().compareTo(pivot) < 0) {
+                i++;
+                Producto temp = arr.get(i);
+                arr.set(i, arr.get(j));
+                arr.set(j, temp);
+            }
+        }
+        Producto temp = arr.get(i + 1);
+        arr.set(i + 1, arr.get(high));
+        arr.set(high, temp);
+        return i + 1;
     }
 
     /**
@@ -273,6 +313,11 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
 
+    /**
+    * Método que mezcla los elementos de la lista
+    *  @param arr: lista de productos
+    * @param izq: indice izquierdo
+     */
     public void merge(List<Producto> arr, int izq, int mid, int der){
         int n1 = mid - izq + 1;
         int n2 = der - mid;
