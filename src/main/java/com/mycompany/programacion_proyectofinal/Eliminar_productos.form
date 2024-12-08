@@ -170,15 +170,15 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="clave_t1" min="-2" pref="210" max="-2" attributes="0"/>
+                              <Component id="fecha_t" min="-2" pref="210" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="clave_label1" min="-2" max="-2" attributes="0"/>
+                              <Component id="fecha_label" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="clave_label2" min="-2" max="-2" attributes="0"/>
+                              <Component id="razon_label" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -202,11 +202,11 @@
                           <Component id="porque" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="clave_label1" min="-2" max="-2" attributes="0"/>
+                      <Component id="fecha_label" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="clave_t1" min="-2" max="-2" attributes="0"/>
+                      <Component id="fecha_t" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="clave_label2" min="-2" max="-2" attributes="0"/>
+                      <Component id="razon_label" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="133" max="-2" attributes="0"/>
                       <EmptySpace pref="216" max="32767" attributes="0"/>
@@ -286,7 +286,7 @@
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="porque.setToolTipText(&quot;La clave del producto que sera eliminado&quot;);"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JTextField" name="clave_t1">
+            <Component class="javax.swing.JTextField" name="fecha_t">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -300,7 +300,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="clave_label1">
+            <Component class="javax.swing.JLabel" name="fecha_label">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="57" green="34" red="1" type="rgb"/>
@@ -314,7 +314,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha de eliminaci&#xf3;n:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="clave_label2">
+            <Component class="javax.swing.JLabel" name="razon_label">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="57" green="34" red="1" type="rgb"/>
@@ -335,7 +335,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="jTextArea1">
+                <Component class="javax.swing.JTextArea" name="razon_t">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>

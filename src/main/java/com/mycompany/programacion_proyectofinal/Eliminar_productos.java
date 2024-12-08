@@ -53,11 +53,11 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         clave_label = new javax.swing.JLabel();
         clave_t = new javax.swing.JTextField();
         porque = new javax.swing.JLabel();
-        clave_t1 = new javax.swing.JTextField();
-        clave_label1 = new javax.swing.JLabel();
-        clave_label2 = new javax.swing.JLabel();
+        fecha_t = new javax.swing.JTextField();
+        fecha_label = new javax.swing.JLabel();
+        razon_label = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        razon_t = new javax.swing.JTextArea();
 
         principal.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -112,26 +112,26 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         porque.setText("?");
         porque.setToolTipText("La clave del producto que sera eliminado");
 
-        clave_t1.setEditable(false);
-        clave_t1.setBackground(new java.awt.Color(210, 210, 210));
-        clave_t1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clave_t1.setForeground(new java.awt.Color(30, 30, 30));
+        fecha_t.setEditable(false);
+        fecha_t.setBackground(new java.awt.Color(210, 210, 210));
+        fecha_t.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        fecha_t.setForeground(new java.awt.Color(30, 30, 30));
 
-        clave_label1.setBackground(new java.awt.Color(1, 52, 87));
-        clave_label1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        clave_label1.setForeground(new java.awt.Color(1, 52, 87));
-        clave_label1.setText("Fecha de eliminación:");
+        fecha_label.setBackground(new java.awt.Color(1, 52, 87));
+        fecha_label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        fecha_label.setForeground(new java.awt.Color(1, 52, 87));
+        fecha_label.setText("Fecha de eliminación:");
 
-        clave_label2.setBackground(new java.awt.Color(1, 52, 87));
-        clave_label2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        clave_label2.setForeground(new java.awt.Color(1, 52, 87));
-        clave_label2.setText("Razón:");
+        razon_label.setBackground(new java.awt.Color(1, 52, 87));
+        razon_label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        razon_label.setForeground(new java.awt.Color(1, 52, 87));
+        razon_label.setText("Razón:");
 
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextArea1.setColumns(20);
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        razon_t.setBackground(new java.awt.Color(255, 255, 255));
+        razon_t.setColumns(20);
+        razon_t.setForeground(new java.awt.Color(0, 0, 0));
+        razon_t.setRows(5);
+        jScrollPane2.setViewportView(razon_t);
 
         javax.swing.GroupLayout agregar_seccionLayout = new javax.swing.GroupLayout(agregar_seccion);
         agregar_seccion.setLayout(agregar_seccionLayout);
@@ -154,13 +154,13 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
                         .addComponent(porque))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(clave_t1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fecha_t, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(clave_label1))
+                        .addComponent(fecha_label))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(clave_label2))
+                        .addComponent(razon_label))
                     .addGroup(agregar_seccionLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -178,11 +178,11 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
                     .addComponent(clave_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(porque))
                 .addGap(45, 45, 45)
-                .addComponent(clave_label1)
+                .addComponent(fecha_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clave_t1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fecha_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
-                .addComponent(clave_label2)
+                .addComponent(razon_label)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
@@ -235,17 +235,17 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel agregar_seccion;
     private javax.swing.JLabel clave_label;
-    private javax.swing.JLabel clave_label1;
-    private javax.swing.JLabel clave_label2;
     private javax.swing.JTextField clave_t;
-    private javax.swing.JTextField clave_t1;
     private javax.swing.JButton eliminar;
+    private javax.swing.JLabel fecha_label;
+    private javax.swing.JTextField fecha_t;
     private javax.swing.JButton guardar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel porque;
     private javax.swing.JPanel principal;
+    private javax.swing.JLabel razon_label;
+    private javax.swing.JTextArea razon_t;
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
@@ -256,7 +256,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     public void fecha_hoy(){
         java.util.Date fecha = new Date();
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        clave_t1.setText(formato.format(fecha));
+        fecha_t.setText(formato.format(fecha));
     }
 
 
