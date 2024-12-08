@@ -1,11 +1,14 @@
 package com.mycompany.programacion_proyectofinal;
 
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author miche
  * */
 public class Arbol {
+    List<Producto> productos = new ArrayList<>();
     private static Nodo raiz;
 
     public static Nodo getRaiz() {
@@ -42,12 +45,13 @@ public class Arbol {
      *
      * @param nodo
      * */
-    private void inOrdenRecursivo(Nodo nodo) {
+    List<Producto> inOrdenRecursivo(Nodo nodo) {
         if (nodo != null) {
             inOrdenRecursivo(nodo.izquierdo);
-            System.out.println(nodo.producto);
+            productos.add(nodo.producto);
             inOrdenRecursivo(nodo.derecho);
         }
+        return productos;
     }
     /**
      * Metodo para construir el arbol apartir de la lista

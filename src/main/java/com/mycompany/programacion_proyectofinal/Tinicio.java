@@ -26,6 +26,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     Stack<String> historial = new Stack<>();
     List<Producto> productos;
     private final String ARCHIVO_JSON = "productos.json";
+    Arbol arbol = new Arbol();
     /**
      * Creates new form Tinicio
      */
@@ -40,7 +41,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         historial("Se ha iniciado sesion!");
         try {
             productos = cargarProductosDesdeArchivo();
-            crearArbol();
+            arbol.construirDesdeLista(productos);
         } catch (Exception e) {
             productos = new ArrayList<>();
         }
@@ -256,6 +257,8 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
+
+
     /**metodo para agregar los productos del archivo a la lista
      *Decodifica de base 64 la imagen
      * @return productos que es una lista
@@ -293,13 +296,9 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         return productos;
     }
 
-    public void crearArbol(){
-        Arbol arbol = new Arbol();
-        for (Producto producto : productos) {
-            arbol.agregar(producto);
-        }
-    }
-
+    /**
+     * Maneja los eventos de los botones
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == agregar){
@@ -313,7 +312,17 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == mostrar){
-            Mostrar_productos mostrar_p = new Mostrar_productos(productos);
+            if(productos.isEmpty()){
+                Mostrar_productos mostrar_p = new Mostrar_productos(productos);
+                mostrar_p.setLocation(0, 0);
+                mostrar_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+                contenido.removeAll();
+                contenido.add(mostrar_p,BorderLayout.CENTER);
+                contenido.revalidate();
+                contenido.repaint();
+            }
+            Mostrar_productos mostrar_p = new Mostrar_productos(productos, arbol);
             mostrar_p.setLocation(0, 0);
             mostrar_p.setSize(contenido.getWidth(), contenido.getHeight());
 
@@ -364,7 +373,21 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         }
     }
 
+    /**
+     * Metodo para agregar un mensaje al historial
+     * @param mensaje mensaje a agregar
+     */
     public void historial(String mensaje){
         this.historial.push(mensaje);
+    }
+
+    public void generarArbol(){
+        arbol.construirDesdeLista(productos);
+    }
+
+    public void añadirAlArbol(ArrayList<Producto> producto){
+        for(Producto p: producto){
+            arbol.agregar(p);
+        }
     }
 }

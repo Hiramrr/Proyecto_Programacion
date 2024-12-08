@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -24,6 +23,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     String ruta;
     List<Producto> productos;
     private final String ARCHIVO_JSON = "productos.json";
+    ArrayList<Producto> productosNuevos = new ArrayList<>();
 
     /**
      * Se inicializan los elementos de la interfaz
@@ -315,13 +315,8 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * @return numero Aleatorio
      */
     public String generarClave(){
-        Random random = new Random();
-        int limiteInferior = 10000;
-        int limiteSuperior = 65535;
-        int limiteSuperiorAbierto = limiteSuperior + 1;
-        int numeroAleatorio = limiteInferior + random.nextInt(limiteSuperiorAbierto - limiteInferior);
- 
-        return String.valueOf(numeroAleatorio);
+        int clave = tabla.getRowCount() + 1;
+        return String.valueOf(clave);
     }
     
     /**
@@ -382,16 +377,26 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         String nombre = nombre_t.getText();
         String cantidad = cantidad_t.getText();
         String precio = precio_t.getText();
-        byte[] imagen = getImagen(ruta);
-        Image imagenBuena = new ImageIcon(imagen).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-        Object[] fila = {clave, nombre, cantidad, precio, new JLabel(new ImageIcon(imagenBuena))};
-        ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
-        Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
-        agregarProductoAlArchivo(p);
+        try {
+            byte[] imagen = getImagen(ruta);
+            Image imagenBuena = new ImageIcon(imagen).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Object[] fila = {clave, nombre, cantidad, precio, new JLabel(new ImageIcon(imagenBuena))};
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+            Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
+            productosNuevos.add(p);
+        } catch (NullPointerException e){
+            byte[] imagen = getImagen("src/main/java/Resources/Images/default.png");
+            Image imagenBuena = new ImageIcon(imagen).getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+            Object[] fila = {clave, nombre, cantidad, precio, new JLabel(new ImageIcon(imagenBuena))};
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+            Producto p = new Producto(Integer.parseInt(clave), nombre, Integer.parseInt(cantidad), Double.parseDouble(precio), imagen);
+            productosNuevos.add(p);
+        }
     }
 
     /**
     * Maneja las acciones de los botones
+     * @param evt
     */
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -402,8 +407,20 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
             ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se ha agreado un producto! " + nombre_t.getText());
             agregarProducto();
         }
+        if(evt.getSource() == guardar){
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
+            guardarCambios();
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
+        }
     }
-    
+
+    public void guardarCambios(){
+        for(Producto producto: productosNuevos){
+            agregarProductoAlArchivo(producto);
+        }
+    }
+
+
     /**
      * Obtiene el arreglo de bytes de la imagen por medio de su ruta en el sistema
      * @param ruta
@@ -448,11 +465,5 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
 
-
-    public void buscarProducto(){
-        for(Producto p : productos){
-
-        }
-    }
 }
 

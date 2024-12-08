@@ -25,16 +25,24 @@ import java.util.List;
 public class Mostrar_productos extends javax.swing.JPanel implements ActionListener {
     private final String ARCHIVO_JSON = "productos.json";
     List<Producto> productos = new ArrayList<>();
-    List<Producto> productosOriginal = new ArrayList<>();
+    Arbol arbol;
     /**
      * Se inicializan los elementos de la interfaz
      */
+
     public Mostrar_productos(List<Producto> productos) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
         this.productos = productos;
-        this.productosOriginal = new ArrayList<>(productos);
         agregarTabla(this.productos);
+    }
+
+    public Mostrar_productos(List<Producto> productos,Arbol arbol) {
+        initComponents();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
+        this.productos = productos;
+        agregarTabla(this.productos);
+        this.arbol = arbol;
     }
 
     /**
@@ -225,7 +233,7 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == orden_default){
-            agregarTabla(productosOriginal);
+            inOrden();
         }
         if(evt.getSource() == orden_nombre){
             //quickSort
@@ -237,6 +245,12 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
         }
     }
 
+
+    public void inOrden(){
+        productos.removeAll(productos);
+        productos = arbol.inOrdenRecursivo(arbol.getRaiz());
+        agregarTabla(productos);
+    }
 
     /**
      * Ordena la tabla usando quicksort
