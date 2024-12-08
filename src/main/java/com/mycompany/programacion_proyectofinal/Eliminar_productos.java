@@ -31,6 +31,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         fecha_hoy();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
         agregarTabla(productos);
+        agregarListenerSeleccionTabla();
     }
 
     /**
@@ -291,7 +292,39 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actionPerformed(ActionEvent evt) {
+        if(evt.getSource() == eliminar){
+            //eliminarProducto();
+        } else if(evt.getSource() == guardar){
+            //guardarCambios();
+        }
+    }
+
+
+    public void eliminarProducto() {
+        int clave = Integer.parseInt(clave_t.getText());
+        Producto producto = Buscar_productos.buscarProductoEnABB(clave);
+        if(producto != null) {
+
+            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
+        } else {
+            JOptionPane.showMessageDialog(null, "Producto no encontrado");
+        }
+    }
+
+    /**
+     * Agrega un listener a la tabla
+     */
+    private void agregarListenerSeleccionTabla() {
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+
+                int filaSeleccionada = tabla.getSelectedRow();
+
+                if (filaSeleccionada != -1) {
+                    clave_t.setText(tabla.getValueAt(filaSeleccionada, 0).toString());
+                }
+            }
+        });
     }
 }
