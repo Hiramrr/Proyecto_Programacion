@@ -3,13 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.programacion_proyectofinal;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -20,10 +14,8 @@ public class Buscar_productos extends javax.swing.JPanel {
     /**
      * Creates new form Buscar_productos
      */
-    public Buscar_productos(List<Producto> productos) {
+    public Buscar_productos() {
         initComponents();
-        tabla.setDefaultRenderer(Object.class, new RenderImagen());
-        agregarTabla(productos);
     }
 
     /**
@@ -50,7 +42,7 @@ public class Buscar_productos extends javax.swing.JPanel {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null}
             },
             new String [] {
                 "Código", "Nombre", "Cantidad", "Precio", "Imagen"
@@ -161,34 +153,29 @@ public class Buscar_productos extends javax.swing.JPanel {
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
+
+
     /**
-     * Agrega una fila a la tabla de productos del archivo JSON
-     * @param productos
+     * Metodo para buscar un producto en el ABB por su clave.
+     *
+     * @param clave la clave del producto a buscar
+     * @return el producto encontrado o null si no existe
      */
-    public void agregarTabla(List<Producto> productos) {
-        for(Producto producto: productos) {
-            Object[] fila = new Object[5];
-            fila[0] = String.valueOf(producto.getClave());
-            fila[1] = producto.getNombre();
-            fila[2] = String.valueOf(producto.getCantidad());
-            fila[3] = String.valueOf(producto.getPrecio());
+    public static Producto buscarProductoEnABB(int clave) {
+        return buscarRecursivo(Arbol.getRaiz(), clave);
+    }
 
-            try {
-                byte[] imagenProducto = producto.getImagen();
-                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+    private static Producto buscarRecursivo(Nodo nodo, int clave) {
+        if (nodo == null) {
+            return null; // No encontrado
+        }
 
-                if (bufferedImage != null) {
-                    ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
-                    fila[4] = new JLabel(mFoto);
-                } else {
-                    fila[4] = "Espero que nunca pase esto";
-                }
-            } catch (Exception e) {
-                System.out.println("Error al procesar la imagen: " + e);
-                fila[4] = "Error";
-            }
-
-            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+        if (nodo.producto.getClave() == clave) {
+            return nodo.producto; // Producto encontrado
+        } else if (clave < nodo.producto.getClave()) {
+            return buscarRecursivo(nodo.izquierdo, clave); // Buscar en el subárbol izquierdo
+        } else {
+            return buscarRecursivo(nodo.derecho, clave); // Buscar en el subárbol derecho
         }
     }
 }
