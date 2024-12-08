@@ -121,9 +121,10 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         clave_label.setForeground(new java.awt.Color(1, 52, 87));
         clave_label.setText("Clave del producto:");
 
-        clave_t.setBackground(new java.awt.Color(255, 255, 255));
+        clave_t.setEditable(false);
+        clave_t.setBackground(new java.awt.Color(210, 210, 210));
         clave_t.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clave_t.setForeground(new java.awt.Color(0, 0, 0));
+        clave_t.setForeground(new java.awt.Color(30, 30, 30));
 
         porque.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         porque.setForeground(new java.awt.Color(1, 52, 87));

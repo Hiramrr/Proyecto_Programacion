@@ -87,14 +87,15 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         clave_label.setForeground(new java.awt.Color(1, 52, 87));
         clave_label.setText("Clave del producto:");
 
-        clave_t.setBackground(new java.awt.Color(255, 255, 255));
+        clave_t.setEditable(false);
+        clave_t.setBackground(new java.awt.Color(210, 210, 210));
         clave_t.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        clave_t.setForeground(new java.awt.Color(0, 0, 0));
+        clave_t.setForeground(new java.awt.Color(30, 30, 30));
 
         porque.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         porque.setForeground(new java.awt.Color(1, 52, 87));
         porque.setText("?");
-        porque.setToolTipText("Ingresa la clave del producto que quieres editar");
+        porque.setToolTipText("La clave del producto que quieres editar");
 
         nombre_label.setBackground(new java.awt.Color(1, 52, 87));
         nombre_label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -282,7 +283,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
