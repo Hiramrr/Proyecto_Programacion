@@ -280,9 +280,11 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         String nombreBuscado = nombre.trim().toLowerCase();
         if (nombreProducto.equals(nombreBuscado)) {
             return nodo.producto; // Producto encontrado
-        } else if (nombreBuscado.compareTo(nombreProducto) < 0) {
-            return buscarRecursivoNombre(nodo.izquierdo, nombreBuscado); // Buscar en el subárbol izquierdo
         } else {
+            Producto encontrado = buscarRecursivoNombre(nodo.izquierdo, nombreBuscado); // Buscar en el subárbol izquierdo
+            if (encontrado != null) {
+                return encontrado;
+            }
             return buscarRecursivoNombre(nodo.derecho, nombreBuscado); // Buscar en el subárbol derecho
         }
     }
