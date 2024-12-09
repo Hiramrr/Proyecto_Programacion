@@ -362,7 +362,17 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == buscar){
-            Buscar_productos buscar_p = new Buscar_productos();
+            if(productos.isEmpty()){
+                Buscar_productos buscar_p = new Buscar_productos();
+                buscar_p.setLocation(0, 0);
+                buscar_p.setSize(contenido.getWidth(), contenido.getHeight());
+
+                contenido.removeAll();
+                contenido.add(buscar_p,BorderLayout.CENTER);
+                contenido.revalidate();
+                contenido.repaint();
+            }
+            Buscar_productos buscar_p = new Buscar_productos(productos, arbol);
             buscar_p.setLocation(0, 0);
             buscar_p.setSize(contenido.getWidth(), contenido.getHeight());
 

@@ -3,7 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package com.mycompany.programacion_proyectofinal;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -11,11 +17,20 @@ import java.util.*;
  */
 public class Buscar_productos extends javax.swing.JPanel {
     Arbol arbol = new Arbol();
+    List<Producto> productos = new ArrayList<>();
     /**
      * Creates new form Buscar_productos
      */
     public Buscar_productos() {
         initComponents();
+    }
+
+
+    public Buscar_productos(List<Producto> productos, Arbol arbol) {
+        initComponents();
+        this.productos = productos;
+        this.arbol = arbol;
+        agregarTabla(productos);
     }
 
     /**
@@ -165,6 +180,44 @@ public class Buscar_productos extends javax.swing.JPanel {
         return buscarRecursivo(arbol.getRaiz(), clave);
     }
 
+    /**
+     * Agrega las filas necesarias a la tabla de productos utilizando la lista de productos
+     * @param productos
+     */
+    public void agregarTabla(List<Producto> productos) {
+        ((javax.swing.table.DefaultTableModel) tabla.getModel()).setRowCount(0);
+        for(Producto producto: productos) {
+            Object[] fila = new Object[5];
+            fila[0] = String.valueOf(producto.getClave());
+            fila[1] = producto.getNombre();
+            fila[2] = String.valueOf(producto.getCantidad());
+            fila[3] = String.valueOf(producto.getPrecio());
+
+            try {
+                byte[] imagenProducto = producto.getImagen();
+                BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagenProducto));
+
+                if (bufferedImage != null) {
+                    ImageIcon mFoto = new ImageIcon(bufferedImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH));
+                    fila[4] = new JLabel(mFoto);
+                } else {
+                    fila[4] = "Espero que nunca pase esto";
+                }
+            } catch (Exception e) {
+                System.out.println("Error al procesar la imagen: " + e);
+                fila[4] = "Error";
+            }
+
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
+        }
+    }
+
+    /**
+     * Metodo para buscar un producto en el ABB por su clave.
+     *
+     * @param clave la clave del producto a buscar
+     * @return el producto encontrado o null si no existe
+     */
     private static Producto buscarRecursivo(Nodo nodo, int clave) {
         if (nodo == null) {
             return null; // No encontrado
