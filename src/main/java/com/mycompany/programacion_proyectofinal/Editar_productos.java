@@ -1,12 +1,18 @@
 package com.mycompany.programacion_proyectofinal;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 import javax.imageio.ImageIO;
@@ -26,6 +32,8 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     boolean esNumero = true;
     byte[] imagenProducto;
     List<Producto> productosEditados = new ArrayList<Producto>();
+    boolean seCambiaronImagenes = false;
+    private final String ARCHIVO_JSON = "productos.json";
 
     /**
      * Creates new form Editar_productos
@@ -338,6 +346,13 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
             Image foto = new ImageIcon(ruta).getImage();
             ImageIcon icono = new ImageIcon(foto.getScaledInstance(imagen.getWidth(),imagen.getHeight(),Image.SCALE_SMOOTH));
             imagen.setIcon(icono);
+            seCambiaronImagenes = true;
+
+            try {
+                imagenProducto = Files.readAllBytes(archivos.getSelectedFile().toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -371,7 +386,11 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
             ((javax.swing.table.DefaultTableModel) tabla.getModel()).addRow(fila);
         }
     }
-    
+
+    /**
+     * Maneja los eventos de los botones
+     * @param evt
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == cargar){
@@ -382,16 +401,53 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                 int clave = Integer.parseInt(clave_t.getText());
                 editarProducto(clave);
             }
+            seCambiaronImagenes = false;
+        }
+        if(evt.getSource() == guardar){
+            guardarCambios();
         }
     }
 
+    public void guardarCambios() {
+        for (Producto productoEditado : productosEditados) {
+            for (int i = 0; i < productos.size(); i++) {
+                if (productos.get(i).getClave() == productoEditado.getClave()) {
+                    productos.set(i, productoEditado);
+                    break;
+                }
+            }
+        }
+        JSONArray jsonArray = new JSONArray();
+
+        for (Producto producto : productos) {
+            JSONObject json = new JSONObject();
+            json.put("Clave", producto.getClave());
+            json.put("Nombre", producto.getNombre());
+            json.put("Precio", producto.getPrecio());
+            json.put("Cantidad", producto.getCantidad());
+            json.put("Imagen", Base64.getEncoder().encodeToString(producto.getImagen()));
+            jsonArray.put(json);
+            System.out.println("Producto guardado: " + producto.getNombre());
+        }
+
+        try (FileWriter file = new FileWriter(ARCHIVO_JSON, false)) {
+            file.write(jsonArray.toString(4));
+            JOptionPane.showMessageDialog(null, "Cambios guardados correctamente");
+        } catch (IOException e) {
+            System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
+        }
+        arbol.construirDesdeLista(productos);
+    }
 
     /**
-     * Metodo para editrar productos
-     *
+     * Metodo para editar productos
+     * ojala funcione bien jajaja
      * @param clave
      * */
     public void editarProducto(int clave) {
+        if(!validar()){
+            return;
+        }
         Producto productoAEditar = null;
         for (Producto producto : productos) {
             if (producto.getClave() == clave) {
@@ -403,20 +459,27 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         String nuevoNombre = nombre_t.getText();
         int nuevaCantidad = Integer.parseInt(cantidad_t.getText());
         double nuevoPrecio = Double.parseDouble(precio_t.getText());
-        Image foto = new ImageIcon(imagenProducto).getImage();
+        if (seCambiaronImagenes) {
+            productoAEditar.setImagen(imagenProducto);
+        }
 
         productoAEditar.setNombre(nuevoNombre);
         productoAEditar.setPrecio(nuevoPrecio);
         productoAEditar.setCantidad(nuevaCantidad);
-        productoAEditar.setImagen(imagenProducto);
-
 
         tabla.setValueAt(nuevoNombre, tabla.getSelectedRow(), 1);
         tabla.setValueAt(nuevaCantidad, tabla.getSelectedRow(), 2);
         tabla.setValueAt(nuevoPrecio, tabla.getSelectedRow(), 3);
-        tabla.setValueAt(foto, tabla.getSelectedRow(), 4);
 
-        productosEditados.add(productoAEditar);
+        if (seCambiaronImagenes) {
+            ImageIcon icono = (ImageIcon) imagen.getIcon();
+            Image foto = icono.getImage();
+            tabla.setValueAt(new JLabel(new ImageIcon(foto.getScaledInstance(70, 70, Image.SCALE_SMOOTH))), tabla.getSelectedRow(), 4);
+            tabla.repaint();
+        }
+
+        Producto productoTemporal = new Producto(productoAEditar.getClave(), nuevoNombre, nuevaCantidad, nuevoPrecio, productoAEditar.getImagen());
+        productosEditados.add(productoTemporal);
     }
 
     /**
@@ -451,6 +514,25 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         });
     }
 
+    /**
+     * Valida que los campos de texto no esten vacios y sean validos
+     * @return
+     */
+    public boolean validar(){
+        if(nombre_t.getText().isEmpty() && cantidad_t.getText().isEmpty() && precio_t.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor llene todos los campos");
+            return false;
+        }
+        if(nombre_t.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un nombre al producto");
+            return false;
+        }
+        if(!esNumero){
+            JOptionPane.showMessageDialog(null, "Por favor ingrese un número válido en los campos de cantidad y precio");
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Verifica si el texto ingresado en la cantidad es un numero
@@ -482,6 +564,10 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         }
     }
 
+    /**
+     * Agrega un listener a la tabla para seleccionar un producto
+     * y mostrar su informacion en los campos de texto
+     */
     private void agregarListenerSeleccionTabla() {
         tabla.addMouseListener(new java.awt.event.MouseAdapter() {
 
@@ -494,6 +580,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                     nombre_t.setText(tabla.getValueAt(filaSeleccionada, 1).toString());
                     cantidad_t.setText(tabla.getValueAt(filaSeleccionada, 2).toString());
                     precio_t.setText(tabla.getValueAt(filaSeleccionada, 3).toString());
+                    esNumero = true;
                     int clave = Integer.parseInt(clave_t.getText());
                     Producto productoSeleccionado = productos.stream()
                             .filter(producto -> producto.getClave() == clave)

@@ -461,11 +461,12 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
         for(Producto producto: productosNuevos){
             agregarProductoAlArchivo(producto);
+            productos.add(producto);
         }
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado un total de " + productosNuevos.size() + " productos");
         productosNuevos.clear();
-        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado los cambios en los productos");
-        ((Tinicio) SwingUtilities.getWindowAncestor(this)).añadirAlArbol(productosNuevos);
         JOptionPane.showMessageDialog(null, "Se han guardado los cambios");
+        arbol.construirDesdeLista(productos);
     }
 
 

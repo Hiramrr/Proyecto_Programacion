@@ -62,6 +62,7 @@ public class Arbol {
      * @param productos
      */
     public void construirDesdeLista(List<Producto> productos) {
+        raiz = null;
         for (Producto producto : productos) {
             agregar(producto);
         }

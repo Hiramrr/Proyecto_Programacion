@@ -18,3 +18,43 @@ Nombre del producto: catnip
 Fecha: 08/12/2024
 Razon: El nombre esta mal
  
+Clave: 10
+Nombre del producto: Prueba
+Fecha: 08/12/2024
+Razon: 
+ 
+Clave: 9
+Nombre del producto: Lentes de sol
+Fecha: 08/12/2024
+Razon: 
+ 
+Clave: 9
+Nombre del producto: Lentes de sol
+Fecha: 08/12/2024
+Razon: 
+ 
+Clave: 9
+Nombre del producto: Lentes de sol
+Fecha: 08/12/2024
+Razon: 
+ 
+Clave: 9
+Nombre del producto: Lentes de sol
+Fecha: 08/12/2024
+Razon: 
+ 
+Clave: 9
+Nombre del producto: Prueba
+Fecha: 08/12/2024
+Razon: Prueba
+ 
+Clave: 9
+Nombre del producto: Prueba
+Fecha: 08/12/2024
+Razon: 
+ 
+Clave: 9
+Nombre del producto: Prueba
+Fecha: 08/12/2024
+Razon: 
+ 

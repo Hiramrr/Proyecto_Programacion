@@ -316,19 +316,23 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == eliminar){
-            String nombre = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
-            eliminarProducto();
-            String clave = clave_t.getText();
-            String fecha = fecha_t.getText();
-            String razon = razon_t.getText();
-            productosEliminados.add("Clave: " + clave);
-            productosEliminados.add("Nombre del producto: " + nombre);
-            productosEliminados.add("Fecha: " + fecha);
-            productosEliminados.add("Razon: " + razon);
-            productosEliminados.add(" ");
+            eliminarP();
         } else if(evt.getSource() == guardar){
             guardarCambios();
         }
+    }
+
+    public void eliminarP(){
+        String nombre = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
+        String clave = clave_t.getText();
+        String fecha = fecha_t.getText();
+        String razon = razon_t.getText();
+        productosEliminados.add("Clave: " + clave);
+        productosEliminados.add("Nombre del producto: " + nombre);
+        productosEliminados.add("Fecha: " + fecha);
+        productosEliminados.add("Razon: " + razon);
+        productosEliminados.add(" ");
+        eliminarProducto();
     }
 
     /**
@@ -340,27 +344,15 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         Producto producto = aux.buscarProductoEnABB(clave);
 
         if (producto != null) {
-            int indice = -1;
-            for (int i = 0; i < productos.size(); i++) {
-                if (productos.get(i).getClave() == clave) {
-                    indice = i;
-                    break;
-                }
-            }
-            if (indice != -1) {
-                eliminados.add(clave);
-                productos.remove(indice);
-                ((javax.swing.table.DefaultTableModel) tabla.getModel()).removeRow(tabla.getSelectedRow()); // Eliminar visualmente
-                JOptionPane.showMessageDialog(null, "Producto eliminado correctamente");
-            }
+            producto.setEliminado(true);
+            eliminados.add(clave);
+            ((javax.swing.table.DefaultTableModel) tabla.getModel()).removeRow(tabla.getSelectedRow()); // Eliminar visualmente
+            JOptionPane.showMessageDialog(null, "Producto marcado para eliminación");
         } else {
             JOptionPane.showMessageDialog(null, "Producto no encontrado");
         }
     }
 
-    /*
-    *Actualiza la clave de los productos en la tabla
-     */
 
 
 
@@ -368,19 +360,24 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
      * Guarda los cambios en el archivo JSON
      */
     public void guardarCambios() {
+
         JSONArray jsonArray = new JSONArray();
 
         for (int i = 0; i < productos.size(); i++) {
             Producto producto = productos.get(i);
-            producto.setClave(i + 1);
+            if (!producto.isEliminado()) {
+                producto.setClave(i + 1);
 
-            JSONObject json = new JSONObject();
-            json.put("Clave", producto.getClave());
-            json.put("Nombre", producto.getNombre());
-            json.put("Precio", producto.getPrecio());
-            json.put("Cantidad", producto.getCantidad());
-            json.put("Imagen", Base64.getEncoder().encodeToString(producto.getImagen()));
-            jsonArray.put(json);
+                JSONObject json = new JSONObject();
+                json.put("Clave", producto.getClave());
+                json.put("Nombre", producto.getNombre());
+                json.put("Precio", producto.getPrecio());
+                json.put("Cantidad", producto.getCantidad());
+                json.put("Imagen", Base64.getEncoder().encodeToString(producto.getImagen()));
+                jsonArray.put(json);
+            } else {
+                productos.remove(producto);
+            }
         }
 
         try (FileWriter file = new FileWriter(ARCHIVO_JSON, false)) {
@@ -390,6 +387,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         } catch (IOException e) {
             System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
         }
+        arbol.construirDesdeLista(productos);
     }
 
     public void guardarArchivoEliminados() {

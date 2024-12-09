@@ -9,6 +9,7 @@ public class Producto {
     private int cantidad;
     private double precio;
     public byte[]imagen;
+    private boolean eliminado;
 
     public Producto(int id, String nombre,double cantidad, double precio) {
     }
@@ -59,6 +60,14 @@ public class Producto {
 
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
+    }
+
+    public boolean isEliminado() {
+        return eliminado;
+    }
+
+    public void setEliminado(boolean eliminado) {
+        this.eliminado = eliminado;
     }
 
     @Override
