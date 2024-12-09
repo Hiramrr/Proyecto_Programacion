@@ -52,6 +52,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             productos = new ArrayList<>();
         }
         this.cambios = false;
+        cargarMiyu();
     }
 
     /**
@@ -512,4 +513,13 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         this.historial.push(mensaje);
     }
 
+    /**
+     * Metodo para cargar la imagen de Miyu
+     */
+    public void cargarMiyu(){
+        ImageIcon icono = new ImageIcon("src/main/java/Resources/Images/ingmiyu.jpg");
+        Image foto = icono.getImage();
+        ImageIcon iconoMiyu =  new ImageIcon(foto.getScaledInstance(fotomiyu.getWidth(),fotomiyu.getHeight(),Image.SCALE_SMOOTH));
+        fotomiyu.setIcon(iconoMiyu);
+    }
 }
