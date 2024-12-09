@@ -481,7 +481,9 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         }
 
         Producto productoTemporal = new Producto(productoAEditar.getClave(), nuevoNombre, nuevaCantidad, nuevoPrecio, productoAEditar.getImagen());
-        productosEditados.add(productoTemporal);
+        if (!productosEditados.contains(productoTemporal)) {
+            productosEditados.add(productoTemporal);
+        }
     }
 
     /**
