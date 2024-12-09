@@ -91,7 +91,7 @@ public class Arbol {
         }
     }
 
-    /*
+    /**
     * Metodo para eliminar un producto en el arbol
     * @param clave
      */
