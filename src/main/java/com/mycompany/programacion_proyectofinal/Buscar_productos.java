@@ -35,8 +35,8 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * inicia un nuevo formulario Buscar_productos
-     * @param productos
-     * @param arbol
+     * @param productos lista de tipo producto
+     * @param arbol es un objeto arbol
      */
     public Buscar_productos(List<Producto> productos, Arbol arbol) {
         initComponents();
@@ -217,8 +217,8 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Agrega las filas necesarias a la tabla de productos utilizando la lista de productos
-     * @param productos
-     * @throws Exception
+     * @param productos lista de los productos para crear la tabla
+     * @throws Exception evita errores al tratar las imagenes
      */
     public void agregarTabla(List<Producto> productos) {
         ((javax.swing.table.DefaultTableModel) tabla.getModel()).setRowCount(0);
@@ -289,7 +289,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo maneja los eventos de los botones
-     * @param evt
+     * @param evt objeto ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -304,7 +304,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo para buscar un producto en el ABB por su clave o por su nombre
-     * @throws NumberFormatException
+     * @throws NumberFormatException evita que se ingrese una cantidad invalida
      */
     public void buscarProducto(){
         productosBuscados.clear();
