@@ -41,8 +41,8 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     }
     /**
      * Se inicializan los elementos de la interfaz
-     * @param productos
-     * @param arbol
+     * @param productos lista de productos que se va a mostrar
+     * @param arbol objeto de tipo arbol
      */
     public Mostrar_productos(List<Producto> productos,Arbol arbol) {
         initComponents();
@@ -207,8 +207,8 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
 
     /**
      * Agrega las filas necesarias a la tabla de productos utilizando la lista de productos
-     * @param productos
-     * @throws IOException
+     * @param productos lista con los productos que se van a mostrar en la tabla
+     * @throws IOException advierte sobre errores al cargar las imagenes
      */
     public void agregarTabla(List<Producto> productos) {
         ((javax.swing.table.DefaultTableModel) tabla.getModel()).setRowCount(0);
@@ -240,7 +240,7 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
 
     /**
      * Maneja los eventos de los botones
-     * @param evt
+     * @param evt objeto ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
