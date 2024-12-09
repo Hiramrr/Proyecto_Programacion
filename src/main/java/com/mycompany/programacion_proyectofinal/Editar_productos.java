@@ -79,6 +79,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         editar.setBackground(new java.awt.Color(35, 135, 55));
         editar.setForeground(new java.awt.Color(255, 255, 255));
         editar.setText("Editar");
+        editar.addActionListener(this);
 
         titulo.setBackground(new java.awt.Color(1, 52, 87));
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
