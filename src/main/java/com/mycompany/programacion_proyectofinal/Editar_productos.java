@@ -419,6 +419,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
      * @throws IOException Envia un mensaje si no se pudieron guardar los cambios
      */
     public void guardarCambios() {
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se editaron productos un total de " + productosEditados.size() + " productos");
         for (Producto productoEditado : productosEditados) {
             for (int i = 0; i < productos.size(); i++) {
                 if (productos.get(i).getClave() == productoEditado.getClave()) {
@@ -448,6 +449,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         }
         arbol.construirDesdeLista(productos);
         ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(false);
+
     }
 
     /**

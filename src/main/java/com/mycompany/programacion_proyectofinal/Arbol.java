@@ -13,16 +13,19 @@ import java.util.List;
 public class Arbol {
     private static Nodo raiz;
 
+
+
     /**
-     * Constructor de la clase Arbol
-     */
+     * Metodo para obtener la raiz del arbol
+     * @return raiz la raiz de tip nodo del Arbol
+      */
     public  Nodo getRaiz() {
         return raiz;
     }
 
     /**
-     * Metodo para obtener la raiz del arbol
-     * @return
+     * Metodo para enviar la raiz del arbol
+     * @param raiz de tipo nodo para que se cree el arbol
      */
     public static void setRaiz(Nodo raiz) {
         Arbol.raiz = raiz;
@@ -30,7 +33,7 @@ public class Arbol {
 
     /**
      * Metodo para agregar un producto en el arbol
-     * @param producto
+     * @param producto objeto de tipo producto que se agrega al arbol
      */
     public static void agregar(Producto producto) {
         raiz = agregarRecursivo(raiz, producto);
@@ -39,8 +42,8 @@ public class Arbol {
     /**
      * Metodo para agregar un producto en el arbol
      * de manera recursiva
-     * @param actual
-     * @param producto
+     * @param actual nodo en el que se encuentra o que es la raiz
+     * @param producto objeto de tipo producto
      * @return
      */
     private static Nodo agregarRecursivo(Nodo actual, Producto producto) {
@@ -66,7 +69,7 @@ public class Arbol {
     }
     /**
      * metodo para recorrer el arbol en inOrden
-     * @param nodo
+     * @param nodo objeto de tipo Nodo para ordenar
      * @return resultado
      * */
     public List<Producto> inOrdenRecursivo(Nodo nodo) {
@@ -82,7 +85,7 @@ public class Arbol {
 
     /**
      * Metodo para construir el arbol apartir de la lista de productos
-     * @param productos
+     * @param productos Lista de tipo Producto desde la cual se va a construir el arbol
      */
     public void construirDesdeLista(List<Producto> productos) {
         raiz = null;
@@ -91,9 +94,9 @@ public class Arbol {
         }
     }
 
-    /*
+    /**
     * Metodo para eliminar un producto en el arbol
-    * @param clave
+    * @param clave entero que se va a buscar para eliminar el producto
      */
     public void eliminar(int clave) {
         raiz = eliminarRecursivo(raiz, clave);
@@ -102,9 +105,9 @@ public class Arbol {
     /**
      * Metodo para eliminar un producto en el arbol
      * de manera recursiva
-     * @param actual
-     * @param clave
-     * @return
+     * @param actual objeto de tipo nodo y es en el que se encuentra
+     * @param clave entero que se va a buscar para eliminar el producto
+     * @return actual que es el nodo que se va a eliminar
      */
     private Nodo eliminarRecursivo(Nodo actual, int clave) {
         if (actual == null) {
@@ -139,8 +142,8 @@ public class Arbol {
 
     /**
      * Metodo para encontrar el menor valor en el arbol
-     * @param nodo
-     * @return
+     * @param nodo objeto de tipo nodo
+     * @return nodo que es el nodo con el valor mas paqueño
      */
     private Producto encontrarMenorValor(Nodo nodo) {
         return nodo.izquierdo == null ? nodo.producto : encontrarMenorValor(nodo.izquierdo);
