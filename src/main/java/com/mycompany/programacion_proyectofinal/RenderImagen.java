@@ -14,12 +14,12 @@ import java.awt.*;
 public class RenderImagen extends DefaultTableCellRenderer {
     /**
      * Metodo para renderizar la imagen en la tabla
-     * @param table
-     * @param value
-     * @param isSelected
-     * @param hasFocus
-     * @param row
-     * @param column
+     * @param table objeto Jtable
+     * @param value envia el valor para crear la imagen
+     * @param isSelected boleano si esta seleccionado un elemento de la tabla
+     * @param hasFocus boleano verifica que esta seleccionado una fila de la tbla
+     * @param row entero con el numero de filas de la tabla
+     * @param column entero con el numero de columnas de la tabla
      * @return JLabel
      */
     @Override
