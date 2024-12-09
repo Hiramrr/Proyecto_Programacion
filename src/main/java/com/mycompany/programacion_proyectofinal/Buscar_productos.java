@@ -20,11 +20,13 @@ import java.util.List;
 public class Buscar_productos extends javax.swing.JPanel implements ActionListener {
     Arbol arbol = new Arbol();
     List<Producto> productos = new ArrayList<>();
+    List<Producto> productosBuscados = new ArrayList<>();
     /**
      * Creates new form Buscar_productos
      */
     public Buscar_productos() {
         initComponents();
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
     }
 
 
@@ -32,6 +34,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         initComponents();
         this.productos = productos;
         this.arbol = arbol;
+        tabla.setDefaultRenderer(Object.class, new RenderImagen());
         agregarTabla(productos);
     }
 
@@ -243,8 +246,53 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         }
     }
 
+    private static Producto buscarRecursivoNombre(Nodo nodo, String nombre) {
+        if (nodo == null) {
+            return null; // No encontrado
+        }
+        String nombreProducto = nodo.producto.getNombre().trim().toLowerCase();
+        String nombreBuscado = nombre.trim().toLowerCase();
+        if (nombreProducto.equals(nombreBuscado)) {
+            return nodo.producto; // Producto encontrado
+        } else if (nombreBuscado.compareTo(nombreProducto) < 0) {
+            return buscarRecursivoNombre(nodo.izquierdo, nombreBuscado); // Buscar en el subárbol izquierdo
+        } else {
+            return buscarRecursivoNombre(nodo.derecho, nombreBuscado); // Buscar en el subárbol derecho
+        }
+    }
+
     @Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actionPerformed(ActionEvent evt) {
+        if(evt.getSource() == buscar){
+            buscarProducto();
+        }
+    }
+
+    public void buscarProducto(){
+        productosBuscados.clear();
+        if(clave_t.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingrese una clave o nombre para buscar");
+            return;
+        }
+        try {
+            int clave = Integer.parseInt(clave_t.getText());
+            Producto producto = buscarProductoEnABB(clave);
+            if (producto != null) {
+                productosBuscados.add(producto);
+                agregarTabla(productosBuscados);
+                noexiste.setText("");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            String nombre = clave_t.getText();
+            Producto productoNombre = buscarRecursivoNombre(arbol.getRaiz(), nombre);
+            if (productoNombre != null) {
+                productosBuscados.add(productoNombre);
+                agregarTabla(productosBuscados);
+                noexiste.setText("");
+            } else {
+                noexiste.setText("No existe un producto con ese nombre");
+            }
+        }
     }
 }
