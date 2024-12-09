@@ -437,6 +437,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
             System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
         }
         arbol.construirDesdeLista(productos);
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(false);
     }
 
     /**
@@ -448,6 +449,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         if(!validar()){
             return;
         }
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(true);
         Producto productoAEditar = null;
         for (Producto producto : productos) {
             if (producto.getClave() == clave) {

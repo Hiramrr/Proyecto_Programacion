@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Stack;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  *
@@ -27,6 +27,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     List<Producto> productos;
     private final String ARCHIVO_JSON = "productos.json";
     Arbol arbol = new Arbol();
+    boolean cambios = false;
     /**
      * Creates new form Tinicio
      */
@@ -45,6 +46,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         } catch (Exception e) {
             productos = new ArrayList<>();
         }
+        this.cambios = false;
     }
 
     /**
@@ -302,6 +304,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == agregar){
+            if(cambios){
+                salirSinCambios();
+                if(this.cambios){
+                    return;
+                }
+            }
             Agregar_productos agregar_P = new Agregar_productos(productos, arbol);
             agregar_P.setLocation(0, 0);
             agregar_P.setSize(contenido.getWidth(), contenido.getHeight());
@@ -312,6 +320,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == mostrar){
+            if(cambios){
+                salirSinCambios();
+                if(this.cambios){
+                    return;
+                }
+            }
             if(productos.isEmpty()){
                 Mostrar_productos mostrar_p = new Mostrar_productos(productos);
                 mostrar_p.setLocation(0, 0);
@@ -332,6 +346,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == editar){
+            if(cambios){
+                salirSinCambios();
+                if(this.cambios){
+                    return;
+                }
+            }
             Editar_productos editar_p = new Editar_productos(productos);
             editar_p.setLocation(0, 0);
             editar_p.setSize(contenido.getWidth(), contenido.getHeight());
@@ -342,6 +362,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == eliminar){
+            if(cambios){
+                salirSinCambios();
+                if(this.cambios){
+                    return;
+                }
+            }
             if(productos.isEmpty()){
                 Eliminar_productos eliminar_p = new Eliminar_productos(productos);
                 eliminar_p.setLocation(0, 0);
@@ -362,6 +388,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == buscar){
+            if(cambios){
+                salirSinCambios();
+                if(this.cambios){
+                    return;
+                }
+            }
             if(productos.isEmpty()){
                 Buscar_productos buscar_p = new Buscar_productos();
                 buscar_p.setLocation(0, 0);
@@ -382,6 +414,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
             contenido.repaint();
         }
         if(evt.getSource() == historico){
+            if(cambios){
+                salirSinCambios();
+                if(this.cambios){
+                    return;
+                }
+            }
             Historial_productos historial_p = new Historial_productos(this.historial);
             historial_p.setLocation(0, 0);
             historial_p.setSize(contenido.getWidth(), contenido.getHeight());
@@ -394,6 +432,27 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     }
 
     /**
+     * Metodo que pide confirmacion para salir sin guardar cambios
+     */
+    public void salirSinCambios(){
+        int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea salir sin guardar cambios?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (respuesta == JOptionPane.YES_OPTION) {
+            this.cambios = false;
+        } else {
+            this.cambios = true;
+        }
+    }
+
+    /**
+     * Cambia la variable cambios a true si se han hecho cambios
+     * o a false si no se han hecho cambios
+     * @param cambios
+     */
+    public void setCambios(boolean cambios) {
+        this.cambios = cambios;
+    }
+
+    /**
      * Metodo para agregar un mensaje al historial
      * @param mensaje mensaje a agregar
      */
@@ -401,22 +460,4 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         this.historial.push(mensaje);
     }
 
-    public void actualizarLista(){
-        try {
-            productos = cargarProductosDesdeArchivo();
-            arbol.construirDesdeLista(productos);
-        } catch (Exception e) {
-            productos = new ArrayList<>();
-        }
-    }
-
-    public void añadirAlArbol(ArrayList<Producto> productosNuevos) {
-        if (arbol.getRaiz() == null) {
-            arbol.construirDesdeLista(productosNuevos);
-        } else {
-            for (Producto producto : productosNuevos) {
-                arbol.agregar(producto);
-            }
-        }
-    }
 }

@@ -382,6 +382,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * Agrega un producto a la tabla de productos
      */
     public void agregarProducto(){
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(true);
         int clave = Integer.parseInt(clave_t.getText());
         String nombre = nombre_t.getText();
         int cantidad = Integer.parseInt(cantidad_t.getText());
@@ -466,6 +467,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
         ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han guardado un total de " + productosNuevos.size() + " productos");
         productosNuevos.clear();
         JOptionPane.showMessageDialog(null, "Se han guardado los cambios");
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(false);
         arbol.construirDesdeLista(productos);
     }
 

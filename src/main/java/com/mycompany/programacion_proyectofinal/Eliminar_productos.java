@@ -339,6 +339,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
      * Elimina un producto de la tabla
      */
     public void eliminarProducto() {
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(true);
         int clave = Integer.parseInt(clave_t.getText());
         Buscar_productos aux = new Buscar_productos();
         Producto producto = aux.buscarProductoEnABB(clave);
@@ -384,10 +385,12 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
             file.write(jsonArray.toString(4));
             guardarArchivoEliminados();
             JOptionPane.showMessageDialog(null, "Cambios guardados correctamente");
+            ((Tinicio) SwingUtilities.getWindowAncestor(this)).historial("Se han eliminado productos");
         } catch (IOException e) {
             System.err.println("Error al guardar en el archivo JSON: " + e.getMessage());
         }
         arbol.construirDesdeLista(productos);
+        ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(false);
     }
 
     public void guardarArchivoEliminados() {
