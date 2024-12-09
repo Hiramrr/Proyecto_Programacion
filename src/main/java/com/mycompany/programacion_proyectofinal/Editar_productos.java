@@ -25,6 +25,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  *
  * @author hiram
  */
+
+/**
+ * Clase Editar_productos
+ */
 public class Editar_productos extends javax.swing.JPanel implements ActionListener {
     String ruta;
     List<Producto> productos = new ArrayList<Producto>();
@@ -36,7 +40,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     private final String ARCHIVO_JSON = "productos.json";
 
     /**
-     * Creates new form Editar_productos
+     * Constructor de la clase Editar_productos
      */
     public Editar_productos(List<Producto> productos) {
         initComponents();
@@ -333,6 +337,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Carga una imagen en el JLabel
+     * @throws IOException
      */
     public void cargarImagen(){
         JFileChooser archivos = new JFileChooser();
@@ -408,6 +413,11 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         }
     }
 
+    /**
+     * Guarda los cambios realizados en los productos
+     * en el archivo JSON
+     * @throws IOException
+     */
     public void guardarCambios() {
         for (Producto productoEditado : productosEditados) {
             for (int i = 0; i < productos.size(); i++) {
@@ -520,7 +530,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Valida que los campos de texto no esten vacios y sean validos
-     * @return
+     * @return true si los campos son validos, false si no lo son
      */
     public boolean validar(){
         if(nombre_t.getText().isEmpty() && cantidad_t.getText().isEmpty() && precio_t.getText().isEmpty()){
@@ -555,6 +565,8 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Verifica si el texto ingresado en la precio es un numero
+     * @throws NumberFormatException
+     * @return true si el texto es un numero, false si no lo es
      */
     public void esNumeroPrecio() {
         try {

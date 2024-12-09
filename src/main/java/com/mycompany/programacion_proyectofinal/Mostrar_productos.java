@@ -21,7 +21,10 @@ import java.util.Locale;
 
 /**
  *
- * @author sasuk
+ * @author hiram
+ */
+/**
+ * Clase que muestra los productos en una tabla
  */
 public class Mostrar_productos extends javax.swing.JPanel implements ActionListener {
     private final String ARCHIVO_JSON = "productos.json";
@@ -30,14 +33,17 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     /**
      * Se inicializan los elementos de la interfaz
      */
-
     public Mostrar_productos(List<Producto> productos) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
         this.productos = productos;
         agregarTabla(this.productos);
     }
-
+    /**
+     * Se inicializan los elementos de la interfaz
+     * @param productos
+     * @param arbol
+     */
     public Mostrar_productos(List<Producto> productos,Arbol arbol) {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
@@ -202,6 +208,7 @@ public class Mostrar_productos extends javax.swing.JPanel implements ActionListe
     /**
      * Agrega las filas necesarias a la tabla de productos utilizando la lista de productos
      * @param productos
+     * @throws IOException
      */
     public void agregarTabla(List<Producto> productos) {
         ((javax.swing.table.DefaultTableModel) tabla.getModel()).setRowCount(0);

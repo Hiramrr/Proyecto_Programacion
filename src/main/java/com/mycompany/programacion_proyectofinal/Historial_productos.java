@@ -8,12 +8,17 @@ import java.util.Stack;
 
 /**
  *
- * @author cinom
+ * @author hiram
+ */
+
+/**
+ * Clase Historial_productos
  */
 public class Historial_productos extends javax.swing.JPanel {
     Stack <String> historial;
     /**
-     * Creates new form Historial_productos
+     * constructor de la clase Historial_productos
+     * @param historial
      */
     public Historial_productos(Stack<String> historial) {
         initComponents();
@@ -113,6 +118,9 @@ public class Historial_productos extends javax.swing.JPanel {
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodo para llenar el texto del historial
+     */
     public void llenarTexto(){
         jTextArea1.setText("");
         for (String string : this.historial) {

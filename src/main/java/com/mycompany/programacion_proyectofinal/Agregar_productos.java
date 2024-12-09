@@ -34,6 +34,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     /**
      * Se inicializan los elementos de la interfaz
      * @param productos
+     * @param arbol
      */
     public Agregar_productos(List<Producto> productos,Arbol arbol) {
         initComponents();
@@ -320,7 +321,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
     /**
-     * Genera una clave random para el producto que puede ir desde 10000 hasta 65535
+     * Genera una clave para el producto a partir de la cantidad de productos en la tabla
      * @return numero Aleatorio
      */
     public String generarClave(){
@@ -350,6 +351,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     /**
      * Agrega una fila a la tabla de productos del archivo JSON
      * @param productos
+     * @throws IOException
      */
     public void agregarTabla(List<Producto> productos) {
         for(Producto producto: productos) {
@@ -380,6 +382,9 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
     /**
      * Agrega un producto a la tabla de productos
+     * Si no se ha seleccionado una imagen, se coloca una imagen por defecto
+     * Si se ha seleccionado una imagen, se codifica a base 64 y se coloca en la tabla
+     * @throws NullPointerException
      */
     public void agregarProducto(){
         ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(true);
@@ -476,6 +481,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
      * Obtiene el arreglo de bytes de la imagen por medio de su ruta en el sistema
      * @param ruta
      * @return arreglo de bytes de la imagen
+     * @throws IOException
      */
     private byte[] getImagen(String ruta){
         File imagen = new File(ruta);
@@ -526,6 +532,8 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
 
     /**
      * Verifica si el texto ingresado en la cantidad es un numero
+     * Si no es un numero, muestra un mensaje de error
+     * @throws NumberFormatException
      */
     public void esNumeroCantidad() {
         try {
@@ -559,6 +567,7 @@ public class Agregar_productos extends javax.swing.JPanel implements ActionListe
     /** Metodo para agregar un producto al archivo JSON
      *  Codifica la imagen a base 64 con la clase base 64
      * @param producto
+     * @throws IOException
      */
     public void agregarProductoAlArchivo(Producto producto) {
         this.productos.add(producto);

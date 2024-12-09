@@ -20,6 +20,10 @@ import java.util.List;
  *
  * @author hiram
  */
+
+/**
+ * Clase Eliminar_productos
+ */
 public class Eliminar_productos extends javax.swing.JPanel implements ActionListener {
     private final String ARCHIVO_JSON = "productos.json";
     Arbol arbol = new Arbol();
@@ -29,7 +33,9 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     ArrayList<String> productosEliminados = new ArrayList<>();
 
     /**
-     * Creates new form Eliminar_Productos
+     * Constructor de la clase Eliminar_productos
+     * @param productos
+     * @param arbol
      */
     public Eliminar_productos(List<Producto> productos,Arbol arbol) {
         initComponents();
@@ -41,7 +47,10 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         this.productos = productos;
         this.productosFinales = new ArrayList<>();
     }
-
+    /**
+     * Constructor de la clase Eliminar_productos
+     * @param productos
+     */
     public Eliminar_productos(List<Producto> productos) {
         initComponents();
         fecha_hoy();
@@ -282,6 +291,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     /**
      * Agrega una fila a la tabla de productos del archivo JSON
      * @param productos
+     * @throws IOException
      */
     public void agregarTabla(List<Producto> productos) {
         for(Producto producto: productos) {
@@ -312,6 +322,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
 
     /**
      * maneja los eventos de los botones
+     * @param evt
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -322,6 +333,9 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         }
     }
 
+    /**
+     * Elimina un producto
+     */
     public void eliminarP(){
         String nombre = tabla.getValueAt(tabla.getSelectedRow(), 1).toString();
         String clave = clave_t.getText();
@@ -354,11 +368,9 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         }
     }
 
-
-
-
     /**
-     * Guarda los cambios en el archivo JSON
+     * Guarda los cambios en el archivo JSO
+     * @throws IOException
      */
     public void guardarCambios() {
 
@@ -393,6 +405,10 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
         ((Tinicio) SwingUtilities.getWindowAncestor(this)).setCambios(false);
     }
 
+    /**
+     * Guarda los productos eliminados en un archivo de texto
+     * @throws IOException
+     */
     public void guardarArchivoEliminados() {
         try (BufferedWriter datos = new BufferedWriter(new FileWriter("RegistroEliminados.txt", true))) {
             for (String producto : productosEliminados) {

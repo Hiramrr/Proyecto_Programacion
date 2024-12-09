@@ -17,19 +17,27 @@ import java.util.List;
  *
  * @author hiram
  */
+
+/**
+ * Clase Buscar_productos
+ */
 public class Buscar_productos extends javax.swing.JPanel implements ActionListener {
     Arbol arbol = new Arbol();
     List<Producto> productos = new ArrayList<>();
     List<Producto> productosBuscados = new ArrayList<>();
     /**
-     * Creates new form Buscar_productos
+     * inicia un nuevo formulario Buscar_productos
      */
     public Buscar_productos() {
         initComponents();
         tabla.setDefaultRenderer(Object.class, new RenderImagen());
     }
 
-
+    /**
+     * inicia un nuevo formulario Buscar_productos
+     * @param productos
+     * @param arbol
+     */
     public Buscar_productos(List<Producto> productos, Arbol arbol) {
         initComponents();
         this.productos = productos;
@@ -200,7 +208,6 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo para buscar un producto en el ABB por su clave.
-     *
      * @param clave la clave del producto a buscar
      * @return el producto encontrado o null si no existe
      */
@@ -211,6 +218,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
     /**
      * Agrega las filas necesarias a la tabla de productos utilizando la lista de productos
      * @param productos
+     * @throws Exception
      */
     public void agregarTabla(List<Producto> productos) {
         ((javax.swing.table.DefaultTableModel) tabla.getModel()).setRowCount(0);
@@ -242,7 +250,6 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo para buscar un producto en el ABB por su clave.
-     *
      * @param clave la clave del producto a buscar
      * @return el producto encontrado o null si no existe
      */
@@ -262,7 +269,6 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo para buscar un producto en el ABB por su nombre.
-     *
      * @param nombre el nombre del producto a buscar
      * @return el producto encontrado o null si no existe
      */
@@ -283,7 +289,6 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo maneja los eventos de los botones
-     *
      * @param evt
      */
     @Override
@@ -299,6 +304,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Metodo para buscar un producto en el ABB por su clave o por su nombre
+     * @throws NumberFormatException
      */
     public void buscarProducto(){
         productosBuscados.clear();

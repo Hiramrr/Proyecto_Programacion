@@ -22,6 +22,11 @@ import javax.swing.*;
  *
  * @author hiram
  */
+
+/**
+ * Clase Tinicio
+ * Main de la aplicacion
+ */
 public class Tinicio extends javax.swing.JFrame implements ActionListener {
     Stack<String> historial = new Stack<>();
     List<Producto> productos;
@@ -29,7 +34,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     Arbol arbol = new Arbol();
     boolean cambios = false;
     /**
-     * Creates new form Tinicio
+     * crea un nuevo formulario Tinicio
      */
     public Tinicio() {
         initComponents();
@@ -300,6 +305,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
 
     /**
      * Maneja los eventos de los botones
+     * @param evt evento
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
