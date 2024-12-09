@@ -17,23 +17,14 @@ public class Producto {
     public byte[]imagen;
     private boolean eliminado;
 
-    /**
-     * Constructor de la clase Producto
-     * @param id
-     * @param nombre
-     * @param cantidad
-     * @param precio
-     */
-    public Producto(int id, String nombre,double cantidad, double precio) {
-    }
 
     /**
      * Constructor de la clase Producto
-     * @param clave
-     * @param nombre
-     * @param cantidad
-     * @param precio
-     * @param imagen
+     * @param clave entero que indica la clave del producto
+     * @param nombre String con el nombre del producto
+     * @param cantidad entero con la cantidad disponible del producto
+     * @param precio numero con decimal que es el precio del producto
+     * @param imagen arreglo de bytes con los ´pixeles de la imagen
      */
     public Producto(int clave, String nombre, int cantidad, double precio, byte[] imagen) {
         this.clave = clave;
@@ -89,6 +80,7 @@ public class Producto {
 
     /**
      * para saber si un producto fue eliminado
+     * @return eliminado boleano de si fue eliminado true o no false
      */
     public boolean isEliminado() {
         return eliminado;
@@ -96,6 +88,7 @@ public class Producto {
 
     /**
      * para marcar un producto como eliminado
+     * @param eliminado boleano de si se elimino o no el producto
      */
     public void setEliminado(boolean eliminado) {
         this.eliminado = eliminado;
@@ -103,7 +96,7 @@ public class Producto {
 
     /**
      * Metodo toString de la clase Producto
-     * @return String
+     * @return String con todos los datos del producto
      */
     @Override
     public String toString() {
