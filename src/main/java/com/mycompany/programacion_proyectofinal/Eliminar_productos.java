@@ -34,8 +34,8 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
 
     /**
      * Constructor de la clase Eliminar_productos
-     * @param productos
-     * @param arbol
+     * @param productos lista con objetos de tipo producto
+     * @param arbol objeto de tipo arbol
      */
     public Eliminar_productos(List<Producto> productos,Arbol arbol) {
         initComponents();
@@ -49,7 +49,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
     }
     /**
      * Constructor de la clase Eliminar_productos
-     * @param productos
+     * @param productos lista con los objetos producto que se van a eliminar
      */
     public Eliminar_productos(List<Producto> productos) {
         initComponents();
@@ -290,8 +290,8 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
 
     /**
      * Agrega una fila a la tabla de productos del archivo JSON
-     * @param productos
-     * @throws IOException
+     * @param productos lista de tipo producto desde la cual se va a generar la tabla
+     * @throws IOException advierte sobre errores con la imagenes
      */
     public void agregarTabla(List<Producto> productos) {
         for(Producto producto: productos) {
@@ -322,7 +322,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
 
     /**
      * maneja los eventos de los botones
-     * @param evt
+     * @param evt objeto ActionEvent para que funcione la interfaz
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -370,7 +370,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
 
     /**
      * Guarda los cambios en el archivo JSO
-     * @throws IOException
+     * @throws IOException advierte sobre errores al guardar el JSON
      */
     public void guardarCambios() {
 
@@ -407,7 +407,7 @@ public class Eliminar_productos extends javax.swing.JPanel implements ActionList
 
     /**
      * Guarda los productos eliminados en un archivo de texto
-     * @throws IOException
+     * @throws IOException advierte sobre errores al guardar los productos eliminados
      */
     public void guardarArchivoEliminados() {
         try (BufferedWriter datos = new BufferedWriter(new FileWriter("RegistroEliminados.txt", true))) {
