@@ -6,6 +6,8 @@ package com.mycompany.programacion_proyectofinal;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.util.*;
@@ -15,7 +17,7 @@ import java.util.List;
  *
  * @author hiram
  */
-public class Buscar_productos extends javax.swing.JPanel {
+public class Buscar_productos extends javax.swing.JPanel implements ActionListener {
     Arbol arbol = new Arbol();
     List<Producto> productos = new ArrayList<>();
     /**
@@ -49,7 +51,8 @@ public class Buscar_productos extends javax.swing.JPanel {
         titulo = new javax.swing.JLabel();
         clave_label = new javax.swing.JLabel();
         clave_t = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        buscar = new javax.swing.JButton();
+        noexiste = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1073, 718));
 
@@ -57,7 +60,7 @@ public class Buscar_productos extends javax.swing.JPanel {
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Código", "Nombre", "Cantidad", "Precio", "Imagen"
@@ -85,13 +88,17 @@ public class Buscar_productos extends javax.swing.JPanel {
         clave_label.setBackground(new java.awt.Color(1, 52, 87));
         clave_label.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         clave_label.setForeground(new java.awt.Color(1, 52, 87));
-        clave_label.setText("Clave del producto:");
+        clave_label.setText("Busqueda:");
 
         clave_t.setBackground(new java.awt.Color(255, 255, 255));
         clave_t.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         clave_t.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setBackground(new java.awt.Color(1, 52, 87));
+        buscar.setBackground(new java.awt.Color(1, 52, 87));
+        buscar.setText("buscar");
+        buscar.addActionListener(this);
+
+        noexiste.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout agregar_seccionLayout = new javax.swing.GroupLayout(agregar_seccion);
         agregar_seccion.setLayout(agregar_seccionLayout);
@@ -105,9 +112,11 @@ public class Buscar_productos extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(clave_t, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addComponent(buscar)
+                        .addGap(33, 33, 33)
+                        .addComponent(noexiste, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(titulo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         agregar_seccionLayout.setVerticalGroup(
             agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,7 +127,8 @@ public class Buscar_productos extends javax.swing.JPanel {
                 .addGroup(agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clave_label)
                     .addComponent(clave_t, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noexiste, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -137,7 +147,7 @@ public class Buscar_productos extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, principalLayout.createSequentialGroup()
                 .addComponent(agregar_seccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 572, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -160,10 +170,11 @@ public class Buscar_productos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel agregar_seccion;
+    private javax.swing.JButton buscar;
     private javax.swing.JLabel clave_label;
     private javax.swing.JTextField clave_t;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel noexiste;
     private javax.swing.JPanel principal;
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
@@ -230,5 +241,10 @@ public class Buscar_productos extends javax.swing.JPanel {
         } else {
             return buscarRecursivo(nodo.derecho, clave); // Buscar en el subárbol derecho
         }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
