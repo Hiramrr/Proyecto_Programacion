@@ -256,7 +256,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" pref="226" max="-2" attributes="0"/>
+                      <Component id="fotomiyu" min="-2" pref="226" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -272,7 +272,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" pref="298" max="-2" attributes="0"/>
+                  <Component id="fotomiyu" min="-2" pref="298" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -305,12 +305,7 @@
             <Property name="text" type="java.lang.String" value="Empleado del mes:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Resources/Images/ing miyu (Custom) (1).jpg"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JLabel" name="fotomiyu">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

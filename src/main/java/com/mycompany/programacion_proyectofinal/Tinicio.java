@@ -76,7 +76,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         contenido = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        fotomiyu = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -209,8 +209,6 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
         jLabel1.setForeground(new java.awt.Color(1, 52, 87));
         jLabel1.setText("Empleado del mes:");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/Images/ing miyu (Custom) (1).jpg"))); // NOI18N
-
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(1, 52, 87));
         jLabel4.setText("Ingeniero Miyu");
@@ -228,7 +226,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
                 .addGroup(contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fotomiyu, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addContainerGap(797, Short.MAX_VALUE))
@@ -241,7 +239,7 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fotomiyu, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -299,12 +297,12 @@ public class Tinicio extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JPanel contenido;
     private javax.swing.JButton editar;
     private javax.swing.JButton eliminar;
+    private javax.swing.JLabel fotomiyu;
     private javax.swing.JButton historico;
     private javax.swing.JLabel iconoP;
     private javax.swing.JPanel icono_tienda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
