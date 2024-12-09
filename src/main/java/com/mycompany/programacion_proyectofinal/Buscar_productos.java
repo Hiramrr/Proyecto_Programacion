@@ -56,6 +56,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         clave_t = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         noexiste = new javax.swing.JLabel();
+        regresar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1073, 718));
 
@@ -98,10 +99,16 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         clave_t.setForeground(new java.awt.Color(0, 0, 0));
 
         buscar.setBackground(new java.awt.Color(1, 52, 87));
+        buscar.setForeground(new java.awt.Color(255, 255, 255));
         buscar.setText("buscar");
         buscar.addActionListener(this);
 
         noexiste.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        regresar.setBackground(new java.awt.Color(1, 52, 87));
+        regresar.setForeground(new java.awt.Color(255, 255, 255));
+        regresar.setText("Todos los productos");
+        regresar.addActionListener(this);
 
         javax.swing.GroupLayout agregar_seccionLayout = new javax.swing.GroupLayout(agregar_seccion);
         agregar_seccion.setLayout(agregar_seccionLayout);
@@ -117,15 +124,21 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
                         .addGap(18, 18, 18)
                         .addComponent(buscar)
                         .addGap(33, 33, 33)
-                        .addComponent(noexiste, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(titulo))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addComponent(noexiste, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(agregar_seccionLayout.createSequentialGroup()
+                        .addComponent(titulo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(regresar)))
+                .addContainerGap())
         );
         agregar_seccionLayout.setVerticalGroup(
             agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, agregar_seccionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titulo)
+                .addGroup(agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(titulo)
+                    .addComponent(regresar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(agregar_seccionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clave_label)
@@ -142,7 +155,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
             .addGroup(principalLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1028, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addComponent(agregar_seccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         principalLayout.setVerticalGroup(
@@ -179,6 +192,7 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel noexiste;
     private javax.swing.JPanel principal;
+    private javax.swing.JButton regresar;
     private javax.swing.JTable tabla;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
