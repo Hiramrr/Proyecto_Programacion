@@ -337,7 +337,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Carga una imagen en el JLabel
-     * @throws IOException
+     * @throws IOException manda mensaje si no se puede cargar la imagen
      */
     public void cargarImagen(){
         JFileChooser archivos = new JFileChooser();
@@ -363,7 +363,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Agrega una fila a la tabla de productos del archivo JSON
-     * @param productos
+     * @param productos lista de tipo Producto
      */
     public void agregarTabla(List<Producto> productos) {
         for(Producto producto: productos) {
@@ -394,7 +394,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Maneja los eventos de los botones
-     * @param evt
+     * @param evt objeto de tipo ActionEvent
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
@@ -416,7 +416,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     /**
      * Guarda los cambios realizados en los productos
      * en el archivo JSON
-     * @throws IOException
+     * @throws IOException Envia un mensaje si no se pudieron guardar los cambios
      */
     public void guardarCambios() {
         for (Producto productoEditado : productosEditados) {
@@ -453,7 +453,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     /**
      * Metodo para editar productos
      * ojala funcione bien jajaja
-     * @param clave
+     * @param clave entero que es la clave de un producto a editar
      * */
     public void editarProducto(int clave) {
         if(!validar()){
@@ -565,7 +565,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
 
     /**
      * Verifica si el texto ingresado en la precio es un numero
-     * @throws NumberFormatException
+     * @throws NumberFormatException verifica que se ingrese un numero valido
      * @return true si el texto es un numero, false si no lo es
      */
     public void esNumeroPrecio() {
