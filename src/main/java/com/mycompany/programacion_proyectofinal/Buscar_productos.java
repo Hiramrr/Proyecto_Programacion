@@ -260,6 +260,12 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         }
     }
 
+    /**
+     * Metodo para buscar un producto en el ABB por su nombre.
+     *
+     * @param nombre el nombre del producto a buscar
+     * @return el producto encontrado o null si no existe
+     */
     private static Producto buscarRecursivoNombre(Nodo nodo, String nombre) {
         if (nodo == null) {
             return null; // No encontrado
@@ -275,13 +281,25 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
         }
     }
 
+    /**
+     * Metodo maneja los eventos de los botones
+     *
+     * @param evt
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == buscar){
             buscarProducto();
         }
+        if(evt.getSource() == regresar){
+            agregarTabla(productos);
+            noexiste.setText("");
+        }
     }
 
+    /**
+     * Metodo para buscar un producto en el ABB por su clave o por su nombre
+     */
     public void buscarProducto(){
         productosBuscados.clear();
         if(clave_t.getText().isEmpty()) {
@@ -295,7 +313,6 @@ public class Buscar_productos extends javax.swing.JPanel implements ActionListen
                 productosBuscados.add(producto);
                 agregarTabla(productosBuscados);
                 noexiste.setText("");
-                return;
             }
         } catch (NumberFormatException e) {
             String nombre = clave_t.getText();
