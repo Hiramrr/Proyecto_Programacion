@@ -25,6 +25,7 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
     Arbol arbol = new Arbol();
     boolean esNumero = true;
     byte[] imagenProducto;
+    List<Producto> productosEditados = new ArrayList<Producto>();
 
     /**
      * Creates new form Editar_productos
@@ -375,6 +376,12 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
         if(evt.getSource() == cargar){
             cargarImagen();
         }
+        if(evt.getSource() == editar){
+            if(esNumero){
+                int clave = Integer.parseInt(clave_t.getText());
+                editarProducto(clave);
+            }
+        }
     }
 
 
@@ -384,8 +391,6 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
      * @param clave
      * */
     public void editarProducto(int clave) {
-
-        // Buscar el producto
         Producto productoAEditar = null;
         for (Producto producto : productos) {
             if (producto.getClave() == clave) {
@@ -393,24 +398,24 @@ public class Editar_productos extends javax.swing.JPanel implements ActionListen
                 break;
             }
         }
-        ArrayList<Producto> productoEditado = new ArrayList<>();
+
         String nuevoNombre = nombre_t.getText();
         int nuevaCantidad = Integer.parseInt(cantidad_t.getText());
         double nuevoPrecio = Double.parseDouble(precio_t.getText());
         Image foto = new ImageIcon(imagenProducto).getImage();
 
-        // Actualizar los valores
         productoAEditar.setNombre(nuevoNombre);
         productoAEditar.setPrecio(nuevoPrecio);
         productoAEditar.setCantidad(nuevaCantidad);
+        productoAEditar.setImagen(imagenProducto);
 
-        // Guardar los cambios en el archivo JSON
-        //Agregar_productos.agregarProductoAlArchivo(productoAEditar);
-        System.out.println("Producto actualizado con éxito.");
 
-        arbol.construirDesdeLista(productos);
+        tabla.setValueAt(nuevoNombre, tabla.getSelectedRow(), 1);
+        tabla.setValueAt(nuevaCantidad, tabla.getSelectedRow(), 2);
+        tabla.setValueAt(nuevoPrecio, tabla.getSelectedRow(), 3);
+        tabla.setValueAt(foto, tabla.getSelectedRow(), 4);
 
-        // agregar ventana para confirmar los cambios y que se realicen los cambios
+        productosEditados.add(productoAEditar);
     }
 
     /**
