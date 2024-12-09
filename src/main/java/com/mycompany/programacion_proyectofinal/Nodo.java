@@ -12,7 +12,7 @@ public class Nodo {
     Nodo izquierdo, derecho;
     /**
      * Metodo constructor de la clase nodo
-     * @param producto
+     * @param producto objeto de tipo producto que se envia como valor del nodo
      * */
     public Nodo(Producto producto) {
         this.producto = producto;
