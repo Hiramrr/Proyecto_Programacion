@@ -18,7 +18,7 @@ public class Historial_productos extends javax.swing.JPanel {
     Stack <String> historial;
     /**
      * constructor de la clase Historial_productos
-     * @param historial
+     * @param historial pila de tipo string con las acciones realizadas
      */
     public Historial_productos(Stack<String> historial) {
         initComponents();
